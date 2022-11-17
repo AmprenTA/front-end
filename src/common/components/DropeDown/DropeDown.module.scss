@@ -1,0 +1,53 @@
+.dropeDown {
+  width: 100%;
+  margin-top: 32px;
+
+  select {
+    cursor: pointer;
+    padding: 0 18px;
+    width: 306px;
+    height: 54px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #222122;
+
+    option {
+      padding: 8px 18px;
+      font-size: 16px;
+      font-weight: 600;
+      height: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &_List {
+    position: absolute;
+    display: flex;
+    width: 338px;
+    background: rgb(255, 255, 255);
+    border: none;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-bottom: 4px solid black;
+    border-right: 4px solid black;
+    border-radius: 4px;
+    top: 52px;
+    overflow-y: hidden;
+    height: 180px;
+  }
+
+  &_Item {
+    cursor: pointer;
+    color: #222122;
+    background: transparent;
+    font-weight: 500;
+    padding: 8px 18px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

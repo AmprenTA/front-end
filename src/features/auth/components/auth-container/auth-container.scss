@@ -1,0 +1,44 @@
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.auth-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.first-container {
+  justify-self: center;
+  align-self: center;
+}
+
+.second-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  border-left: 1px solid #959595;
+}
+
+.first-paragraph {
+  color: #5b5b5b;
+  font-size: 24px;
+  width: 542px;
+  line-height: 32px;
+  font-weight: 400;
+}
+
+.second-paragraph {
+  font-size: 32px;
+  width: 521px;
+  font-weight: 500;
+  line-height: 50px;
+
+  span {
+    padding: 4px;
+    background-color: #fcd351;
+    border-radius: 4px;
+  }
+}

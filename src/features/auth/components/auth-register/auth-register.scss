@@ -1,0 +1,46 @@
+.button-wrapper {
+  margin-top: 20px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #959595;
+
+  .auth-register-button-try {
+    background: #acd3e2;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #222122;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+  }
+
+  .auth-register-button-try:hover {
+    transform: scale(1.1, 1.1);
+  }
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #5b5b5b;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  .link {
+    text-decoration: none;
+    color: #222122;
+    font-weight: 500;
+  }
+}

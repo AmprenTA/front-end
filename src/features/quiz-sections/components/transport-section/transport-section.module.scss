@@ -1,0 +1,75 @@
+.transportSection {
+  &_ModalBody {
+    height: 500px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  &_BackButtonContainer {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 6px;
+    }
+  }
+
+  &_BackButton {
+    background-color: unset;
+    border: unset;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #222122;
+  }
+
+  &_Stepper {
+    width: 800px;
+  }
+
+  &_Image {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  &_Footer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &_UpArrow {
+    height: 30px;
+    width: 40px;
+    cursor: pointer;
+    margin-left: 4px;
+    border: 2px solid #222122;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  &_DownArrow {
+    height: 30px;
+    width: 40px;
+    cursor: pointer;
+    border: 2px solid #222122;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+
+  &_Info {
+    width: 650px;
+    font-size: 32px;
+    font-weight: 500;
+    color: #222122;
+    line-height: 50px;
+  }
+}

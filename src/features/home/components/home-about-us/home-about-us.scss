@@ -1,0 +1,101 @@
+.about-us {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 120px;
+
+  .first-union {
+    height: 180px;
+    width: 390px;
+    background-color: #acd3e2;
+    margin-bottom: 34px;
+    /* top-left | top-right | bottom-right | bottom-left */
+    border-radius: 0 100px 100px 0;
+    border: 3px solid #222122;
+    position: relative;
+  }
+
+  .image-wrapper {
+    width: 160px;
+    height: 160px;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 3px solid #222122;
+      border-radius: 50%;
+    }
+  }
+
+  .image-wrapper.Sergiu {
+    right: 220px;
+  }
+
+  .image-wrapper.Nadejda {
+    right: 12px;
+  }
+
+  .image-wrapper.Anastasia {
+    right: 220px;
+  }
+
+  .second {
+    width: 548px;
+  }
+
+  .third {
+    width: 286px;
+  }
+
+  .header {
+    color: #222122;
+    font-size: 40px;
+    line-height: 64px;
+    font-weight: 600;
+  }
+
+  .paragraph {
+    width: 525px;
+    font-size: 20px;
+    color: #5b5b5b;
+  }
+
+  .steps-wrapper {
+    .steps-image {
+      margin-top: 56px;
+      width: 552px;
+    }
+  }
+}
+
+.steps {
+  position: relative;
+  column-gap: 24px;
+  color: #5b5b5b;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+
+  .first {
+    position: absolute;
+    text-align: start;
+    width: 144px;
+  }
+
+  .second {
+    position: absolute;
+    text-align: center;
+    right: 242px;
+    width: 144px;
+  }
+
+  .third {
+    position: absolute;
+    text-align: center;
+    right: 0;
+    width: 144px;
+  }
+}

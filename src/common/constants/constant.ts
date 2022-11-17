@@ -1,5 +1,11 @@
 export const PAGES_PATHS = {
-  DASHBOARD: '/dashboard',
-  TODO_LIST: '/todo-list',
-  ACTIVITIES: '/ACTIVITIES',
+  HOME: '/',
+  REGISTER: '/inregistrare',
+  LOGIN: '/conectare',
+  TRANSPORT_SECTION: '/transport',
+  TRANSPORT_FLY: '/transport/avion',
+  TRANSPORT_BUS: '/transport/bus',
+  HOUSEHOLD_SECTION: '/gospodarie',
+  FOOD_SECTION: '/mancare',
+  STATISTIC: '/statistici',
 }

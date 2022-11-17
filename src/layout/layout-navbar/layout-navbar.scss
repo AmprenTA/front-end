@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 50%;
+
+    .link {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 32px;
+      color: #5b5b5b;
+      margin-right: 96px;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        border-bottom: 2px solid #5b5b5b;
+      }
+    }
+  }
+}
