@@ -61,19 +61,15 @@ export const TransportQuestions = () => {
       setHaveCar(false)
     }
   }
-
-  const handleError = () => {
+  const validateQuestion = () => {
     switch (stepNumber) {
-      case 1:
-        if (stepNumber === 1 && checked === '') {
-          setError(true)
-        }
-        return error
+      case 0:
+        return checked === '' ? setError(false) : setError(true)
       default:
         return setError(false)
     }
   }
-
+  console.log('Chhh', checked, stepNumber)
   function getStepContent(step: number) {
     switch (step) {
       case 1:
@@ -83,6 +79,7 @@ export const TransportQuestions = () => {
               1,
               'Deții o mașină?',
               <CheckBoxItem cheked={checked} onChange={handleCheckbox} answears={answears} />,
+              '306px',
             )}
           </div>
         )
@@ -100,6 +97,7 @@ export const TransportQuestions = () => {
                 placeholder='EX: 15'
                 onChange={handleChangeInput}
               />,
+              '306px',
             )}
           </div>
         )
@@ -116,6 +114,7 @@ export const TransportQuestions = () => {
                 onChange={handleChangeDropeDown}
                 value={car!.fuel_type!}
               />,
+              '306px',
             )}
           </div>
         )
@@ -132,6 +131,7 @@ export const TransportQuestions = () => {
                 placeholder='EX: 15'
                 onChange={handleChangeInput}
               />,
+              '306px',
             )}
           </div>
         )
@@ -151,6 +151,7 @@ export const TransportQuestions = () => {
                 }}
                 answears={answears}
               />,
+              '306px',
             )}
           </div>
         )
@@ -172,6 +173,8 @@ export const TransportQuestions = () => {
       setShowFlyQuestion(true)
     }
   }, [stepNumber, haveCar])
+
+  console.log('validateQuestion()', error)
   return (
     <div className={style.transportQuestion}>
       <div className={style.transportQuestion_Body}>
@@ -192,22 +195,14 @@ export const TransportQuestions = () => {
               styleConfig={stepperStyle}
               activeStep={stepNumber}></Stepper>
             <div>{getStepContent(stepNumber)}</div>
-            {/* {error ? (
-              <p className={style.transportQuestion_Error}>
-                Ca sa poti trece la urmatorul pas, raspunde la intrebare.
-              </p>
-            ) : null} */}
             <div className={style.transportQuestion_Footer}>
               {stepNumber === 5 ? (
                 <></>
               ) : (
                 <Button
-                  // disabled={error ? true : false}
-                  style={error ? { background: '#EEEEEE' } : null}
-                  onClick={() => {
-                    handleError()
-                    setStepNumber(stepNumber + 1)
-                  }}
+                  disabled={error ? true : false}
+                  style={error ? { background: '#EEEEEE', border: '2px solid #959595' } : null}
+                  onClick={validateQuestion}
                   className={style.transportQuestion_DownArrow}
                   icon={<DownArrow />}
                 />

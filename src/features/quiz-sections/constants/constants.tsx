@@ -36,7 +36,7 @@ export const tarnsportOptions: Array<CustomDropdownOptionValue> = [
   { value: 0, text: 'Tren' },
   { value: 1, text: 'Autobuz' },
 ]
-export const question = (number: number, question: string, children: any) => {
+export const question = (number: number, question: string, children: any, width: string) => {
   return (
     <div className={style.transportQuestion_Question}>
       <div style={{ display: 'flex', width: '100%' }}>
@@ -49,7 +49,7 @@ export const question = (number: number, question: string, children: any) => {
         </span>
       </div>
       <div className={style.transportQuestion_QuestionChildren}>
-        <div style={{ width: '306px' }}>{children}</div>
+        <div style={{ width: width }}>{children}</div>
       </div>
     </div>
   )

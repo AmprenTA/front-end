@@ -60,6 +60,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
               1,
               'Ai zburat cu avionul în ultima lună?',
               <CheckBoxItem cheked={checked} onChange={handleCheckbox} answears={answears} />,
+              '306px',
             )}
           </div>
         )
@@ -75,6 +76,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
                 options={orase}
                 onChange={handleChangeDropeDown}
               />,
+              '306px',
             )}
           </div>
         )
@@ -90,6 +92,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
                 options={orase}
                 onChange={handleChangeDropeDown}
               />,
+              '306px',
             )}
           </div>
         )
@@ -100,6 +103,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
               4,
               'Mai ai un zbor cu avionul pe care vrei să-l adaugi?',
               <CheckBoxItem cheked={checked} onChange={handleCheckbox} answears={answears} />,
+              '306px',
             )}
           </div>
         )

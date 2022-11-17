@@ -65,6 +65,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
               1,
               'Folosești transportul în comun?',
               <CheckBoxItem cheked={checked} onChange={handleCheckbox} answears={answears} />,
+              '306px',
             )}
             <div className={style.transportQuestion_Answear} style={{ marginBottom: '32px' }}></div>
           </div>
@@ -82,6 +83,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
                 placeholder='EX: 15'
                 onChange={handleChangeInput}
               />,
+              '306px',
             )}
           </div>
         )
@@ -97,6 +99,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
                 options={tarnsportOptions}
                 onChange={handleChangeDropeDown}
               />,
+              '306px',
             )}
           </div>
         )
@@ -107,6 +110,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
               4,
               'Mai ai un mijloc de transport în comun pe care vrei să-l adaugi?',
               <CheckBoxItem cheked={checked} onChange={handleCheckbox} answears={answears} />,
+              '306px',
             )}
           </div>
         )
