@@ -3,20 +3,20 @@ import { PersonalCard } from 'features/auth/assets/icons/PersonalCard'
 import { AuthContainer } from '../auth-container/auth-container'
 import { Controller, useForm } from 'react-hook-form'
 import { Email } from 'features/auth/assets/icons/Email'
-import { Address } from 'features/auth/assets/icons/Address'
 import { Password } from 'features/auth/assets/icons/Password'
-// import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import './auth-register.scss'
 import { PAGES_PATHS } from 'common/constants/constant'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Eye } from 'features/auth/assets/icons/Eye'
 import { useEffect, useState } from 'react'
 import { ERROR_MESSAGE } from 'features/auth/constants/auth-constants'
 import { Button } from 'common/components/Button/Button'
+import { Register } from 'features/auth/models/models'
+import api from 'common/api/api'
 export const AuthRegister = () => {
   const [showPasswors, setShowPassword] = useState(false)
   const [showConfirmPasswors, setConfirmShowPassword] = useState(false)
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   useEffect(() => {
     setTimeout(() => {
       setShowPassword(false)
@@ -25,11 +25,10 @@ export const AuthRegister = () => {
   }, [showPasswors, showConfirmPasswors])
   const defaultValues = {
     firstName: '',
+    lastName: '',
     email: '',
-    address: '',
-    city: '',
     password: '',
-    confirmPassword: '',
+
     accept: '',
   }
   const {
@@ -39,7 +38,22 @@ export const AuthRegister = () => {
     reset,
   } = useForm({ defaultValues })
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    const payload: Register = {
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      password: data.password,
+    }
+    try {
+      const response: any = await api.post(`houses`, payload)
+      if (response === 201) {
+        navigate(PAGES_PATHS.HOME)
+      }
+      return response
+    } catch (err) {
+      console.log('Error', err.response.data)
+    }
     reset()
   }
   return (
@@ -51,6 +65,10 @@ export const AuthRegister = () => {
             control={control}
             rules={{
               required: ERROR_MESSAGE.EMPTY_FIELD,
+              pattern: {
+                value: /^[a-zA-Z]+$/g,
+                message: ERROR_MESSAGE.ALPHABETS_ONLY,
+              },
             }}
             render={({ field: { onChange, value }, fieldState }) => (
               <Input
@@ -68,10 +86,35 @@ export const AuthRegister = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Controller
+            name='lastName'
+            control={control}
+            rules={{
+              required: ERROR_MESSAGE.EMPTY_FIELD,
+              pattern: {
+                value: /^[a-zA-Z]+$/g,
+                message: ERROR_MESSAGE.ALPHABETS_ONLY,
+              },
+            }}
+            render={({ field: { onChange, value }, fieldState }) => (
+              <Input
+                icon={<PersonalCard />}
+                type={'text'}
+                placeholder={'John Wick'}
+                label='Prenume'
+                important={true}
+                onChange={onChange}
+                value={value}
+                error={errors['lastName']?.message}
+              />
+            )}
+          />
+        </div>
+        <div style={{ marginTop: '16px' }}>
+          <Controller
             name='email'
             control={control}
             rules={{
-              required: ERROR_MESSAGE.INVALID_EMAIL,
+              required: ERROR_MESSAGE.EMPTY_FIELD,
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                 message: ERROR_MESSAGE.INVALID_EMAIL,
@@ -93,36 +136,13 @@ export const AuthRegister = () => {
         </div>
         <div style={{ marginTop: '16px' }}>
           <Controller
-            name='address'
-            control={control}
-            rules={{
-              pattern: {
-                value: /^[a-zA-Z]+$/g,
-                message: '',
-              },
-            }}
-            render={({ field: { onChange, value }, fieldState }) => (
-              <Input
-                placeholder='Strada, Numărul, Cod poștal'
-                type='text'
-                icon={<Address />}
-                label='Adresa'
-                important={true}
-                onChange={onChange}
-                value={value}
-                error={errors['address']?.message}
-              />
-            )}
-          />
-        </div>
-        <div style={{ marginTop: '16px' }}>
-          <Controller
             name='password'
             control={control}
             rules={{
+              required: ERROR_MESSAGE.EMPTY_FIELD,
               pattern: {
-                value: /^[a-zA-Z]+$/g,
-                message: '',
+                value: /.{8,}$/,
+                message: ERROR_MESSAGE.PASSWORD_VALIDATION,
               },
             }}
             render={({ field: { onChange, value }, fieldState }) => (
@@ -142,33 +162,6 @@ export const AuthRegister = () => {
             )}
           />
         </div>
-        <div style={{ marginTop: '16px' }}>
-          <Controller
-            name='confirmPassword'
-            control={control}
-            rules={{
-              pattern: {
-                value: /^[a-zA-Z]+$/g,
-                message: '',
-              },
-            }}
-            render={({ field: { onChange, value }, fieldState }) => (
-              <Input
-                placeholder='************'
-                type={showConfirmPasswors ? 'text' : 'password'}
-                icon={<Password />}
-                additionalIcon={
-                  <Eye style={{ cursor: 'pointer' }} onClick={() => setConfirmShowPassword(true)} />
-                }
-                label='repetă Parola'
-                important={true}
-                onChange={onChange}
-                value={value}
-                error={errors['confirmPassword']?.message}
-              />
-            )}
-          />
-        </div>
         <div className='button-wrapper'>
           <Button className='auth-register-button-try'>
             Înregistrează-te
@@ -177,7 +170,7 @@ export const AuthRegister = () => {
         </div>
         <div className='auth-wrapper'>
           Ai deja un cont?
-          <NavLink className='link' to={PAGES_PATHS.LOGIN}>
+          <NavLink style={{ marginLeft: '8px' }} className='link' to={PAGES_PATHS.LOGIN}>
             {` ${'Conectează-te'}`}
           </NavLink>
         </div>

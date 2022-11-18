@@ -4,15 +4,23 @@ import { PAGES_PATHS } from 'common/constants/constant'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 
 import { LayoutContaier } from 'layout/layout-container/layout-container'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './home-hero-section.scss'
+
 export const HeroSection = () => {
   const [showModal, setShowModal] = useState(false)
+  const [showAnimation, setShowAnimation] = useState(false)
   const navigate = useNavigate()
   const move = require('../../assests/Move.png')
   const moveYellow = require('../../assests/pointer.png')
   const moveGreen = require('../../assests/MoveGreen.png')
+  useEffect(() => {
+    let timer1 = setTimeout(() => setShowAnimation(true), 2000)
+    return () => {
+      clearTimeout(timer1)
+    }
+  }, [])
   return (
     <LayoutContaier>
       {showModal ? (
@@ -65,8 +73,29 @@ export const HeroSection = () => {
             <div>
               <img alt='purple' src={move} />
             </div>
-            <div style={{ background: '#F78E91' }} className='square'></div>
+            {!showAnimation ? (
+              <>
+                {' '}
+                <div style={{ background: '#F78E91' }} className='square-dots'>
+                  <div className={'loader'}>
+                    <span className={'loaderDot'}></span>
+                    <span className={'loaderDot'}></span>
+                    <span className={'loaderDot'}></span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {' '}
+                <div style={{ background: '#F78E91' }} className='square-animated'>
+                  <div className={'loader'}>
+                    <span className='title-square'>Ce este carbon footprint?</span>
+                  </div>{' '}
+                </div>
+              </>
+            )}
           </div>
+
           <div className='second-conatiner'>
             <div>
               <img alt='purple' src={moveYellow} />

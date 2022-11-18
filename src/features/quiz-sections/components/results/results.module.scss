@@ -1,0 +1,26 @@
+.result {
+  &_ModalBody {
+    height: 600px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  &_Title {
+    color: #5b5b5b;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 32px;
+    line-height: 32px;
+  }
+
+  &_RegisterText {
+    margin-top: 40px;
+    color: #5b5b5b;
+    line-height: 32px;
+    font-weight: 400;
+    font-size: 20px;
+  }
+}

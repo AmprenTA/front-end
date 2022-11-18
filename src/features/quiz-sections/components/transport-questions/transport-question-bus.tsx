@@ -161,6 +161,9 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
     }
     try {
       const response: any = await api.post(`transportations`, paylaod)
+      if (response === 201) {
+        navigate(PAGES_PATHS.HOUSEHOLD_SECTION)
+      }
       return response
     } catch (err) {
       console.log('Error', err.response.data)

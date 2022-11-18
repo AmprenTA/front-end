@@ -8,4 +8,5 @@ export const PAGES_PATHS = {
   HOUSEHOLD_SECTION: '/gospodarie',
   FOOD_SECTION: '/mancare',
   STATISTIC: '/statistici',
+  RESULT: '/rezultate',
 }

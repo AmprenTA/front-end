@@ -18,3 +18,10 @@ export type Transport = {
   flights: Array<Fly>
   public_transports: Array<Bus>
 }
+
+export type Household = {
+  electricity: number
+  natural_gas: number
+  wood: number
+  footprint_id?: number
+}

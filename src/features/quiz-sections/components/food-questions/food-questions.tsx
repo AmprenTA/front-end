@@ -1,16 +1,20 @@
 import { Button } from 'common/components/Button/Button'
 import { RadioButton } from 'common/components/RadioButton/RadioButton'
+import { PAGES_PATHS } from 'common/constants/constant'
+import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
-import { question } from 'features/quiz-sections/constants/constants'
+import { question, stepperStyle } from 'features/quiz-sections/constants/constants'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import { useEffect, useState } from 'react'
 import { Stepper } from 'react-form-stepper'
+import { useNavigate } from 'react-router-dom'
 
 import style from '../transport-questions/transport-question.module.scss'
 
 export const FoodQuestions = () => {
   const [stepNumber, setStepNumber] = useState<number>(1)
   const [selected, setSelected] = useState('niciodata')
+  const navigate = useNavigate()
   const handleChange = (event: any) => {}
   useEffect(() => {
     setSelected('niciodata')
@@ -153,13 +157,6 @@ export const FoodQuestions = () => {
               />,
               '100%',
             )}
-            <div>
-              <RadioButton
-                handleChange={handleChange}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            </div>
           </div>
         )
       case 10:
@@ -194,9 +191,19 @@ export const FoodQuestions = () => {
         )
       default:
         return (
-          <p className={style.transportQuestion_CongradualtionText}>
-            Felicitări, ai terminat de completat formularul! Ești gata să vezi rezultatele?
-          </p>
+          <div style={{ marginLeft: '40px', marginTop: '80px' }}>
+            <p className={style.transportQuestion_CongradualtionText}>
+              Felicitări, ai terminat de completat formularul! Ești gata să vezi rezultatele?
+            </p>
+            <button
+              className='button-try'
+              onClick={(e) => {
+                navigate(PAGES_PATHS.RESULT)
+              }}>
+              Da, sunt gata
+              <ArrowRight />
+            </button>
+          </div>
         )
     }
   }
@@ -220,14 +227,7 @@ export const FoodQuestions = () => {
           ]}
           className={style.transportQuestion_Stepper}
           connectorStyleConfig={{ activeColor: '#509046' }}
-          styleConfig={{
-            completedBgColor: '#509046',
-            completedTextColor: '#509046',
-            activeBgColor: '#FCD351',
-            activeTextColor: '#FCD351',
-            inactiveTextColor: '#e0e0e0',
-            labelFontSize: '1px',
-          }}
+          styleConfig={stepperStyle}
           activeStep={stepNumber}></Stepper>
         <div>{getStepContent(stepNumber)}</div>
         <div className={style.transportQuestion_Footer}>

@@ -7,6 +7,7 @@ import { TransportSection } from 'features/quiz-sections/components/transport-se
 import { HouseHoldSection } from 'features/quiz-sections/components/household-section/household-section'
 import { FoodSection } from 'features/quiz-sections/components/food-section/food-section'
 import { StatisticLanding } from 'features/statistics/components/statistic-landing/statistic-landing'
+import { Results } from 'features/quiz-sections/components/results/results'
 
 export const PageRouter = () => {
   return (
@@ -18,6 +19,7 @@ export const PageRouter = () => {
       <Route path={PAGES_PATHS.HOUSEHOLD_SECTION} element={<HouseHoldSection />} />
       <Route path={PAGES_PATHS.FOOD_SECTION} element={<FoodSection />} />
       <Route path={PAGES_PATHS.STATISTIC} element={<StatisticLanding />} />
+      <Route path={PAGES_PATHS.RESULT} element={<Results />} />
     </Routes>
   )
 }
