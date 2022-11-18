@@ -1,7 +1,7 @@
 import { Button } from 'common/components/Button/Button'
 import Input from 'common/components/Input/Input'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
-import { question, stepperStyle } from 'features/quiz-sections/constants/constants'
+import { question } from 'features/quiz-sections/constants/constants'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import { useState } from 'react'
 import { Stepper } from 'react-form-stepper'
@@ -76,7 +76,14 @@ export const HouseholdQuestions = () => {
         <Stepper
           steps={[{ label: '.' }, { label: '.' }, { label: '.' }]}
           className={style.transportQuestion_Stepper}
-          connectorStyleConfig={stepperStyle}
+          connectorStyleConfig={{
+            completedBgColor: '#509046',
+            completedTextColor: '#509046',
+            activeBgColor: '#FCD351',
+            activeTextColor: '#FCD351',
+            inactiveTextColor: '#e0e0e0',
+            labelFontSize: '1px',
+          }}
           activeStep={stepNumber}></Stepper>
         <div>{getStepContent(stepNumber)}</div>
         <div className={style.transportQuestion_Footer}>

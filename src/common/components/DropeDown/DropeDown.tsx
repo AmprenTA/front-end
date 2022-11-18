@@ -1,6 +1,6 @@
 import style from './DropeDown.module.scss'
 export type CustomDropdownOptionValue = {
-  value: number | string
+  value: number
   text: string
 }
 interface Props {
@@ -21,7 +21,7 @@ export const DropeDown: React.FC<Props> = ({ ...props }) => {
         placeholder={props.placeholder}>
         {props.options.map((item, key) => {
           return (
-            <option key={key} className={style.dropeDown_Options}>
+            <option key={key} value={item.value} className={style.dropeDown_Options}>
               {item.text}
             </option>
           )

@@ -18,7 +18,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
   const [showBusQuestion, setShowBusQuestion] = useState<boolean>(false)
   const [checked, setChecked] = React.useState<string>('')
   const [stepNumber, setStepNumber] = useState<number>(1)
-  const [newFly, setNewFly] = useState<boolean | undefined>(undefined)
+  const [newFly, setNewFly] = useState<string>('')
   const [multipleFly, setMultipleFly] = useState<Array<Fly>>([])
   const [fly, setFly] = useState<Fly>({
     from: '',
@@ -26,17 +26,17 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
   })
   useEffect(() => {
     setChecked('')
-    setNewFly(undefined)
+    setNewFly('')
   }, [stepNumber])
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setChecked(value)
     if (value === 'Da') {
-      setNewFly(true)
+      setNewFly('Da')
     }
     if (value === 'Nu') {
-      setNewFly(false)
+      setNewFly('Nu')
     }
   }
   const handleChangeDropeDown = (event: any) => {
@@ -44,13 +44,26 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
     setFly({ ...fly!, [name]: value })
   }
   useEffect(() => {
-    if (stepNumber === 1 && newFly === false) {
+    if (stepNumber === 1 && newFly === 'Nu') {
       setShowBusQuestion(true)
     } else {
       setShowBusQuestion(false)
     }
   }, [checked, stepNumber])
+  useEffect(() => {
+    const newArray = [...multipleFly]
+    newArray.push(fly)
 
+    if (newFly === 'Da' && stepNumber === 4) {
+      setFly({ from: '', to: '' })
+      setMultipleFly(newArray)
+      setStepNumber(2)
+    }
+    if (newFly === 'Nu' && stepNumber === 4) {
+      setMultipleFly(newArray)
+      setShowBusQuestion(true)
+    }
+  }, [stepNumber, newFly])
   function getStepContent(step: number) {
     switch (step) {
       case 1:
@@ -111,20 +124,20 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
         return 'Unknown step'
     }
   }
-  useEffect(() => {
-    const newArray = [...multipleFly]
-    newArray.push(fly)
 
-    if (newFly === true && stepNumber === 4) {
-      setMultipleFly(newArray)
-      setStepNumber(2)
-    }
-    if (newFly === false && stepNumber === 4) {
-      setMultipleFly(newArray)
-      setShowBusQuestion(true)
-    }
-  }, [stepNumber, newFly])
+  const isValid = () => {
+    switch (stepNumber) {
+      case 1:
+        return newFly !== '' ? false : true
+      case 2:
+        return fly!.from !== '' ? false : true
+      case 3:
+        return fly.to !== '' ? false : true
 
+      default:
+        return true
+    }
+  }
   return (
     <ModalSection>
       <div className={style.transportQuestion}>
@@ -144,20 +157,20 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
               <div>{getStepContent(stepNumber)}</div>
               <div className={style.transportQuestion_Footer}>
                 <Button
+                  disabled={isValid()}
+                  style={isValid() ? { background: '#EEEEEE', border: '2px solid #959595' } : null}
                   onClick={() => {
-                    if (stepNumber === 4 || newFly === false) {
-                    } else {
-                      setStepNumber(stepNumber + 1)
-                    }
+                    setStepNumber(stepNumber + 1)
                   }}
                   className={style.transportQuestion_DownArrow}
                   icon={<DownArrow />}
                 />
+
                 <Button
+                  disabled={stepNumber === 1 ? true : false}
                   onClick={() => {
                     setStepNumber(stepNumber - 1)
                   }}
-                  disabled={stepNumber === 1 ? true : false}
                   className={style.transportQuestion_UpArrow}
                   icon={<UpArrow />}
                 />

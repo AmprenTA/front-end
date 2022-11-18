@@ -1,10 +1,17 @@
-import { LayoutContaier } from 'layout/layout-container/layout-container'
+import { Navbar } from 'react-bootstrap'
 import { StatisticCards } from '../statistic-card/statistics-card'
-
+import { ChartDate } from '../statistic-chart-date/statistic-chart-date'
+import { LocalChart } from '../statistici-chart-local/statistici-chart-local'
+import { LayoutFooter } from 'layout/layout-footer/layout-footer'
+import React from 'react'
 export const StatisticLanding = () => {
   return (
-    <LayoutContaier>
+    <React.Fragment>
+      <Navbar />
+      <LocalChart />
       <StatisticCards />
-    </LayoutContaier>
+      <ChartDate />
+      <LayoutFooter />
+    </React.Fragment>
   )
 }

@@ -17,10 +17,8 @@
   }
 
   .input-container:hover {
-    border-top: 2px solid black;
-    border-left: 2px solid black;
-    border-bottom: 4px solid black;
-    border-right: 4px solid black;
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
   }
 
   .input-field-without-icon {
@@ -50,14 +48,6 @@
     font-size: 16px;
     font-weight: 500;
     color: #959595;
-  }
-
-  .input-field:focus {
-    outline: none;
-    border-top: 2px solid black;
-    border-left: 2px solid black;
-    border-bottom: 4px solid black;
-    border-right: 4px solid black;
   }
 
   .right-icon {

@@ -10,6 +10,9 @@ import './home-hero-section.scss'
 export const HeroSection = () => {
   const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate()
+  const move = require('../../assests/Move.png')
+  const moveYellow = require('../../assests/pointer.png')
+  const moveGreen = require('../../assests/MoveGreen.png')
   return (
     <LayoutContaier>
       {showModal ? (
@@ -57,7 +60,34 @@ export const HeroSection = () => {
             Nu vrei să ai un cont?<span className='sign-in'> Continuă neînregistrat</span>
           </p>
         </div>
-        <div></div>
+        <div>
+          <div>
+            <div>
+              <img alt='purple' src={move} />
+            </div>
+            <div style={{ background: '#F78E91' }} className='square'></div>
+          </div>
+          <div className='second-conatiner'>
+            <div>
+              <img alt='purple' src={moveYellow} />
+            </div>
+            <div
+              style={{ background: '#FCD351', width: '438px', color: '#5B5B5B' }}
+              className='square'>
+              <span>Cum calculez amprenta de carbon?</span>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img alt='purple' src={moveGreen} />
+            </div>
+            <div
+              style={{ background: '#509046', width: '300px', color: '#FFFEF7' }}
+              className='square'>
+              <span>Efectul de seră, ce este?</span>
+            </div>
+          </div>
+        </div>
       </div>
     </LayoutContaier>
   )

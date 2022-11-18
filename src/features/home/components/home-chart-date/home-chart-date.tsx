@@ -10,7 +10,7 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import { LayoutContaier } from 'layout/layout-container/layout-container'
-
+import style from './home-chart-date.module.scss'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 export const options = {
@@ -28,19 +28,6 @@ export const options = {
           size: 13,
           family: 'IBM Plex Sans',
         },
-      },
-    },
-
-    title: {
-      position: 'top' as const,
-      padding: 25,
-      display: true,
-      text: 'În baza informațiilor adunate, AmprenTA  prezice următoarea evoluție la nivelul local:',
-      font: {
-        size: 24,
-        lineHeight: 1,
-        weight: 'normal',
-        family: 'IBM Plex Sans',
       },
     },
   },
@@ -73,10 +60,19 @@ export const data = {
   ],
 }
 
-export function HomeChart() {
+export function HomeChartDate() {
+  const image = require('../../assests/Footprint.png')
   return (
     <LayoutContaier>
-      <div style={{ marginBottom: '160px', display: 'flex', alignItems: 'flex-start' }}>
+      <div className={style.dateChart}>
+        <div className={style.dateChart_Header}>
+          <div>
+            <img alt='footprint' src={image} />
+          </div>
+          <h3 className={style.dateChart_Details}>
+            Amprenta României a scăzut cu un total de 15 g de CO2 față de luna trecută.
+          </h3>
+        </div>
         <Line options={options} data={data} />
       </div>
     </LayoutContaier>

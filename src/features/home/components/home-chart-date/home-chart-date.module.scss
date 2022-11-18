@@ -1,0 +1,16 @@
+.dateChart {
+  width: 100%;
+  margin-bottom: 100px;
+
+  &_Header {
+    display: flex;
+    width: 100%;
+  }
+
+  &_Details {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    margin-left: 32px;
+  }
+}

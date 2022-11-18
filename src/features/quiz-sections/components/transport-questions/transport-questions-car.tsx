@@ -15,61 +15,91 @@ import React, { useEffect, useState } from 'react'
 import { Stepper } from 'react-form-stepper'
 import { TransportFly } from './transport-question-fly'
 import style from './transport-question.module.scss'
-
 export const TransportQuestions = () => {
   const [checked, setChecked] = React.useState<string>('')
   const [showFlyQuestion, setShowFlyQuestion] = useState<boolean>(false)
 
   const [stepNumber, setStepNumber] = useState<number>(1)
-  const [haveCar, setHaveCar] = useState<boolean | undefined>(undefined)
-  const [arrayOfCars, setArrayOfCars] = useState<Array<Car>>([])
-  const [error, setError] = useState<boolean>(false)
+  const [haveCar, setHaveCar] = useState<string>(' ')
+  const [carAnswers, setCarAnswear] = useState<Array<Car>>([])
   const [car, setCar] = useState<Car>({
-    fuel_type: undefined,
-    total_km: undefined,
-    fuel_consumption: undefined,
+    fuel_type: 0,
+    total_km: 0,
+    fuel_consumption: 0,
   })
 
   useEffect(() => {
     setChecked('')
-    setHaveCar(undefined)
+    setHaveCar('')
   }, [stepNumber])
 
   useEffect(() => {
-    if (stepNumber === 1 && haveCar === false) {
+    if (stepNumber === 1 && haveCar === 'Nu') {
       setShowFlyQuestion(true)
     } else {
       setShowFlyQuestion(false)
     }
   }, [checked, stepNumber])
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setCar({ ...car!, [name]: value })
-  }
+  ///in acest array vor fi salvate toate masinile adaugate
+  useEffect(() => {
+    const newArray = [...carAnswers]
+
+    const newCar = {
+      fuel_type: +car.fuel_type,
+      fuel_consumption: +car.total_km,
+      total_km: +car.total_km,
+    }
+    newArray.push(newCar)
+
+    if (haveCar === 'Da' && stepNumber === 5) {
+      setCar({ fuel_type: 0, total_km: 0, fuel_consumption: 0 })
+      setCarAnswear(newArray)
+      setStepNumber(2)
+    }
+    if (haveCar === 'Nu' && stepNumber === 5) {
+      setCarAnswear(newArray)
+      setShowFlyQuestion(true)
+    }
+  }, [stepNumber, haveCar])
 
   const handleChangeDropeDown = (event: any) => {
     setCar({ ...car!, fuel_type: event.target.value })
   }
+
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setChecked(value)
     if (value === 'Da') {
-      setHaveCar(true)
+      setHaveCar('Da')
     }
     if (value === 'Nu') {
-      setHaveCar(false)
+      setHaveCar('Nu')
     }
   }
-  const validateQuestion = () => {
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setCar({ ...car!, [name]: value })
+  }
+  const isValid = () => {
     switch (stepNumber) {
-      case 0:
-        return checked === '' ? setError(false) : setError(true)
+      case 1:
+        return haveCar !== '' ? false : true
+      case 2:
+        return car!.total_km > 0 ? false : true
+      case 3:
+        return car.fuel_type > 0 ? false : true
+      case 4:
+        return car!.fuel_consumption > 0 ? false : true
+      case 5:
+        return false
+
       default:
-        return setError(false)
+        return true
     }
   }
-  console.log('Chhh', checked, stepNumber)
+
   function getStepContent(step: number) {
     switch (step) {
       case 1:
@@ -112,7 +142,7 @@ export const TransportQuestions = () => {
                 placeholder={'Selectează carburant'}
                 options={carboranti}
                 onChange={handleChangeDropeDown}
-                value={car!.fuel_type!}
+                value={car!.fuel_type}
               />,
               '306px',
             )}
@@ -159,27 +189,12 @@ export const TransportQuestions = () => {
         return 'Unknown step'
     }
   }
-  ///in acest array vor fi salvate toate masinile adaugate
-  useEffect(() => {
-    const newArray = [...arrayOfCars]
-    newArray.push(car)
 
-    if (haveCar === true && stepNumber === 5) {
-      setArrayOfCars(newArray)
-      setStepNumber(2)
-    }
-    if (haveCar === false && stepNumber === 5) {
-      setArrayOfCars(newArray)
-      setShowFlyQuestion(true)
-    }
-  }, [stepNumber, haveCar])
-
-  console.log('validateQuestion()', error)
   return (
     <div className={style.transportQuestion}>
       <div className={style.transportQuestion_Body}>
         {showFlyQuestion ? (
-          <TransportFly arrayOfCars={arrayOfCars} />
+          <TransportFly arrayOfCars={carAnswers} />
         ) : (
           <>
             <Stepper
@@ -200,9 +215,11 @@ export const TransportQuestions = () => {
                 <></>
               ) : (
                 <Button
-                  disabled={error ? true : false}
-                  style={error ? { background: '#EEEEEE', border: '2px solid #959595' } : null}
-                  onClick={validateQuestion}
+                  disabled={isValid()}
+                  style={isValid() ? { background: '#EEEEEE', border: '2px solid #959595' } : null}
+                  onClick={() => {
+                    setStepNumber(stepNumber + 1)
+                  }}
                   className={style.transportQuestion_DownArrow}
                   icon={<DownArrow />}
                 />

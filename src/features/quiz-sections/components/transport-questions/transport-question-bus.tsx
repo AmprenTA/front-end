@@ -1,8 +1,10 @@
+import api from 'common/api/api'
 import { Button } from 'common/components/Button/Button'
 import { CheckBoxItem } from 'common/components/CheckBox/CheckBox'
 import { DropeDown } from 'common/components/DropeDown/DropeDown'
 import Input from 'common/components/Input/Input'
 import { PAGES_PATHS } from 'common/constants/constant'
+import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
 import {
   answears,
@@ -10,7 +12,7 @@ import {
   question,
   stepperStyle,
 } from 'features/quiz-sections/constants/constants'
-import { Bus, Car, Fly } from 'features/quiz-sections/models/transport-models'
+import { Bus, Car, Fly, Transport } from 'features/quiz-sections/models/transport-models'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import React, { useEffect, useState } from 'react'
 import { Stepper } from 'react-form-stepper'
@@ -25,34 +27,54 @@ interface Props {
 export const TransportBus: React.FC<Props> = ({ ...props }) => {
   const [checked, setChecked] = React.useState<string>('')
   const [stepNumber, setStepNumber] = useState<number>(1)
-  const [newBas, setNewBas] = useState<boolean | undefined>(false)
+  const [newBas, setNewBas] = useState<string>('')
   const [multipleBus, setMultipleBus] = useState<Array<Bus>>([])
-  const [bus, setBus] = useState<Bus>({ transport_type: undefined, total_km: undefined })
+  const [bus, setBus] = useState<Bus>({ transport_type: '', total_km: 0 })
   const navigate = useNavigate()
 
   useEffect(() => {
     setChecked('')
-    setNewBas(undefined)
+    setNewBas('')
   }, [stepNumber])
+
+  useEffect(() => {
+    if (stepNumber === 1 && newBas === 'Nu') {
+      navigate(PAGES_PATHS.HOUSEHOLD_SECTION)
+    }
+  }, [checked, stepNumber])
+
+  useEffect(() => {
+    const newArray = [...multipleBus]
+    const newBusType: any = {
+      transport_type: +bus.transport_type,
+      total_km: +bus.total_km,
+    }
+    newArray.push(newBusType)
+    if (newBas === 'Nu' && stepNumber === 4) {
+      setMultipleBus(newArray)
+    }
+    if (newBas === 'Da' && stepNumber === 4) {
+      setBus({ transport_type: '', total_km: 0 })
+      setMultipleBus(newArray)
+      setStepNumber(2)
+    }
+  }, [stepNumber, newBas])
+
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setChecked(value)
     if (value === 'Da') {
-      setNewBas(true)
+      setNewBas('Da')
     }
     if (value === 'Nu') {
-      setNewBas(false)
+      setNewBas('Nu')
     }
   }
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setBus({ ...bus!, [name]: value })
   }
-  useEffect(() => {
-    if (stepNumber === 1 && newBas === false) {
-      navigate(PAGES_PATHS.HOUSEHOLD_SECTION)
-    }
-  }, [checked, stepNumber])
+
   const handleChangeDropeDown = (event: any) => {
     setBus({ ...bus!, transport_type: event.target.value })
   }
@@ -118,19 +140,33 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
         return 'Unknown step'
     }
   }
-  useEffect(() => {
-    const newArray = [...multipleBus]
-    newArray.push(bus)
+  const isValid = () => {
+    switch (stepNumber) {
+      case 1:
+        return newBas !== '' ? false : true
+      case 2:
+        return bus!.total_km > 0 ? false : true
+      case 3:
+        return bus!.transport_type > '' ? false : true
 
-    if (newBas === true && stepNumber === 4) {
-      setMultipleBus(newArray)
-      setStepNumber(2)
+      default:
+        return true
     }
-    if (newBas === false && stepNumber === 4) {
-      setMultipleBus(newArray)
-      navigate(PAGES_PATHS.HOUSEHOLD_SECTION)
+  }
+  const handleSubmitAnswers = async () => {
+    const paylaod: Transport = {
+      cars: props.arrayOfCars,
+      flights: props.multipleFly,
+      public_transports: multipleBus,
     }
-  }, [stepNumber, newBas])
+    try {
+      const response: any = await api.post(`transportations`, paylaod)
+      return response
+    } catch (err) {
+      console.log('Error', err.response.data)
+    }
+  }
+
   return (
     <ModalSection>
       <div className={style.transportQuestion}>
@@ -141,9 +177,21 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
             connectorStyleConfig={{ activeColor: '#509046' }}
             styleConfig={stepperStyle}
             activeStep={stepNumber}></Stepper>
-          <div>{getStepContent(stepNumber)}</div>
+          <div style={{ position: 'relative' }}>{getStepContent(stepNumber)}</div>
+          {stepNumber === 4 && newBas === 'Nu' ? (
+            <div className={style.transportQuestion_ButtonContainer}>
+              <button className={style.transportQuestion_Button} onClick={handleSubmitAnswers}>
+                Treci mai departe
+                <ArrowRight />
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
           <div className={style.transportQuestion_Footer}>
             <Button
+              disabled={isValid()}
+              style={isValid() ? { background: '#EEEEEE', border: '2px solid #959595' } : null}
               onClick={() => {
                 setStepNumber(stepNumber + 1)
               }}
