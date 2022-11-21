@@ -56,7 +56,7 @@ export const DonationCard = () => {
       <div className={style.donationCard} data-aos='fade-right'>
         <h1 style={{ color: '#222122', fontWeight: '500' }}>Donații</h1>
         <div className={style.donationCard_Article}>
-          <p>
+          {/* <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie,
             dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem
             sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit,
@@ -75,7 +75,7 @@ export const DonationCard = () => {
             scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor
             urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia.
             Aliquam in elementum tellus.
-          </p>
+          </p> */}
         </div>
         <div className={style.donationCard_Container}>
           {cards.map((item, index) => {

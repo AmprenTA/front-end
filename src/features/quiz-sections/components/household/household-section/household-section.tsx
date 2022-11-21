@@ -1,6 +1,6 @@
 import { Step, Stepper } from 'react-form-stepper'
 import { ModalSection } from '../../modal-section.tsx/modal-section'
-import styles from '../../transport-section/transport-section.module.scss'
+import styles from '../../transport/transport-section/transport-section.module.scss'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { useState } from 'react'
 import { HouseholdQuestions } from '../household-question/household-question'

@@ -47,7 +47,7 @@ export const Navbar = () => {
         <div className='second-container-navbar'>
           {renderNavbarItems()}
           <button
-            className='button-try'
+            className='button-conect'
             onClick={() => {
               navigate(PAGES_PATHS.LOGIN)
             }}>

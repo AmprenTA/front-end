@@ -55,8 +55,8 @@ export const HeroSection = () => {
         <div>
           <Logo />
           <p className='description'>
-            Știm că ai multe întrebări, de asta am creat un calculator bazat pe Machine
-            Learning,accesibil și ușor de folosit.
+            Acesta este un calculator bazat pe Machine Learning, capabil să-ți calculeze amprenta de
+            carbon și să-ți ofere recomandări personalizate.
           </p>
           <p className='details'>
             Calculează-ți amprenta de carbon și <span>acționează</span> imediat
