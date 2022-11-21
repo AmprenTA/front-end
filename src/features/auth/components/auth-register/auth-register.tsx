@@ -10,11 +10,12 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Eye } from 'features/auth/assets/icons/Eye'
 import { useEffect, useState } from 'react'
 import { ERROR_MESSAGE } from 'features/auth/constants/auth-constants'
-import { Button } from 'common/components/Button/Button'
 import { Register } from 'features/auth/models/models'
 import api from 'common/api/api'
+import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 export const AuthRegister = () => {
   const [showPasswors, setShowPassword] = useState(false)
+  const [error, setError] = useState(false)
   const [showConfirmPasswors, setConfirmShowPassword] = useState(false)
   const navigate = useNavigate()
   useEffect(() => {
@@ -46,18 +47,26 @@ export const AuthRegister = () => {
       password: data.password,
     }
     try {
-      const response: any = await api.post(`houses`, payload)
-      if (response === 201) {
-        navigate(PAGES_PATHS.HOME)
+      const response: any = await api.post(`users/sign_up`, payload)
+      if (response.status === 201) {
+        navigate(PAGES_PATHS.LOGIN)
       }
+
       return response
     } catch (err) {
-      console.log('Error', err.response.data)
+      if (err.response.status === 400) {
+        setError(true)
+      }
     }
     reset()
   }
   return (
     <AuthContainer>
+      {error ? (
+        <div className='error-wrapper'>
+          <span>Adresa de email a fost deja folosita</span>
+        </div>
+      ) : null}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ marginTop: '16px' }}>
           <Controller
@@ -163,10 +172,10 @@ export const AuthRegister = () => {
           />
         </div>
         <div className='button-wrapper'>
-          <Button className='auth-register-button-try'>
+          <button className='auth-register-button-try'>
             Înregistrează-te
-            {/* <ArrowRight /> */}
-          </Button>
+            <ArrowRight />
+          </button>
         </div>
         <div className='auth-wrapper'>
           Ai deja un cont?

@@ -1,3 +1,4 @@
+import api from 'common/api/api'
 import Input from 'common/components/Input/Input'
 import { PAGES_PATHS } from 'common/constants/constant'
 import { Email } from 'features/auth/assets/icons/Email'
@@ -8,8 +9,9 @@ import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AuthContainer } from '../auth-container/auth-container'
-
+import { LoginUser } from 'features/auth/models/models'
 export const Login = () => {
+  const [error, setError] = useState(false)
   const [showPasswors, setShowPassword] = useState(false)
   useEffect(() => {
     setTimeout(() => {
@@ -21,29 +23,41 @@ export const Login = () => {
     email: '',
     password: '',
   }
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm({ defaultValues })
+  const { control, handleSubmit, reset } = useForm({ defaultValues })
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    console.log(data)
+    const payload: LoginUser = {
+      email: data.email,
+      password: data.password,
+    }
+    try {
+      const response: any = await api.post(`users/sign_in`, payload)
+      if (response.status === 201) {
+        localStorage.setItem('user', JSON.stringify(response.data.auth_token))
+        navigate(PAGES_PATHS.HOME)
+      }
+      console.log(response)
+      return response
+    } catch (err) {
+      if (err.response.status === 401) {
+        setError(true)
+      }
+    }
     reset()
   }
   return (
     <AuthContainer>
+      {error ? (
+        <div className='error-wrapper'>
+          <span>Adresa de email sau parola nu este corecta</span>
+        </div>
+      ) : null}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ marginTop: '16px' }}>
           <Controller
             name='email'
             control={control}
-            rules={{
-              pattern: {
-                value: /^[a-zA-Z]+$/g,
-                message: '',
-              },
-            }}
             render={({ field: { onChange, value }, fieldState }) => (
               <Input
                 placeholder='namesurname@domain.com'
@@ -53,7 +67,6 @@ export const Login = () => {
                 important={true}
                 onChange={onChange}
                 value={value}
-                error={errors['email']?.message}
               />
             )}
           />
@@ -62,12 +75,6 @@ export const Login = () => {
           <Controller
             name='password'
             control={control}
-            rules={{
-              pattern: {
-                value: /^[a-zA-Z]+$/g,
-                message: '',
-              },
-            }}
             render={({ field: { onChange, value }, fieldState }) => (
               <Input
                 placeholder='************'
@@ -80,24 +87,19 @@ export const Login = () => {
                 important={true}
                 onChange={onChange}
                 value={value}
-                error={errors['password']?.message}
               />
             )}
           />
         </div>
         <div className='button-wrapper'>
-          <button
-            className='auth-register-button-try'
-            onClick={() => {
-              navigate(PAGES_PATHS.HOME)
-            }}>
-            Înregistrează-te
+          <button className='auth-register-button-try'>
+            Conectează-te
             <ArrowRight />
           </button>
         </div>
         <div className='auth-wrapper'>
           Nu ai un cont?
-          <NavLink className='link' to={PAGES_PATHS.REGISTER}>
+          <NavLink style={{ marginLeft: '8px' }} className='link' to={PAGES_PATHS.REGISTER}>
             {` ${'Inregistrează-te'}`}
           </NavLink>
         </div>
