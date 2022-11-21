@@ -9,4 +9,6 @@ export const PAGES_PATHS = {
   FOOD_SECTION: '/mancare',
   STATISTIC: '/statistici',
   RESULT: '/rezultate',
+  DONATION: '/donatii',
+  USER_DASHBOARD: '/dashboard',
 }

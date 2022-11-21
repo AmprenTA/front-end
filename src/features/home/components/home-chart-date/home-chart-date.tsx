@@ -11,8 +11,10 @@ import {
 import { Line } from 'react-chartjs-2'
 import { LayoutContaier } from 'layout/layout-container/layout-container'
 import style from './home-chart-date.module.scss'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
-
 export const options = {
   responsive: true,
   borderWidth: '4',
@@ -59,12 +61,14 @@ export const data = {
     },
   ],
 }
-
 export function HomeChartDate() {
-  const image = require('../../assests/Footprint.png')
+  const image = require('../../../../common/assets/Footprint.png')
+  useEffect(() => {
+    AOS.init({ duration: 2000 })
+  }, [])
   return (
     <LayoutContaier>
-      <div className={style.dateChart}>
+      <div className={style.dateChart} data-aos='fade-left'>
         <div className={style.dateChart_Header}>
           <div>
             <img alt='footprint' src={image} />

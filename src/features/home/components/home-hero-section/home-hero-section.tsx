@@ -7,7 +7,8 @@ import { LayoutContaier } from 'layout/layout-container/layout-container'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './home-hero-section.scss'
-
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 export const HeroSection = () => {
   const [showModal, setShowModal] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
@@ -21,6 +22,11 @@ export const HeroSection = () => {
       clearTimeout(timer1)
     }
   }, [])
+
+  useEffect(() => {
+    AOS.init({ duration: 2000 })
+  }, [])
+
   return (
     <LayoutContaier>
       {showModal ? (
@@ -45,7 +51,7 @@ export const HeroSection = () => {
         </Modal>
       ) : null}
 
-      <div className='hero-section'>
+      <div className='hero-section' data-aos='fade-up' data-aos-anchor-placement='top-center'>
         <div>
           <Logo />
           <p className='description'>

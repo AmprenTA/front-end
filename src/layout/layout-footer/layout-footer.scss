@@ -3,11 +3,11 @@
   border-top: 3px solid#222122;
 
   .logo {
-    height: 60px;
+    height: 40px;
   }
 
   .footer-content {
-    height: 228px;
+    height: 158px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -31,7 +31,7 @@
 
   @media only screen and (max-width: 2560px) {
     .footer-content {
-      max-width: 1300px;
+      max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
     }

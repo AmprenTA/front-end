@@ -1,13 +1,21 @@
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { LayoutContaier } from 'layout/layout-container/layout-container'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react'
+import AOS from 'aos'
 import './home-info-section.scss'
 export const InfoSection = () => {
+  useEffect(() => {
+    AOS.init({ duration: 2000 })
+  }, [])
+
   const dioxide = require('../../assests/CarbonDioxide.png')
   const warming = require('../../assests/StopGlobalWarming.png')
   const carbonFootrpint = require('../../assests/CarbonFootprint.png')
+
   return (
     <LayoutContaier>
-      <div className='info-container'>
+      <div className='info-container' data-aos='fade-right'>
         <div>
           <h3 className='card-header' style={{ backgroundColor: '#F78E91' }}>
             Ce este amprenta de carbon?
@@ -53,7 +61,7 @@ export const InfoSection = () => {
           </div>
         </div>
       </div>
-      <div style={{ marginBottom: '50px' }}>
+      <div style={{ marginBottom: '50px' }} data-aos='fade-left'>
         <h3 className='card-header' style={{ backgroundColor: '#FCD351' }}>
           Cum calculez amprenta de carbon?
         </h3>

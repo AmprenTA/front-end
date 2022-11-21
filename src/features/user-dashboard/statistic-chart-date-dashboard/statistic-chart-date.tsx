@@ -61,16 +61,17 @@ export const data = {
 }
 
 export function ChartDate() {
-  const image = require('../../../../common/assets/Footprint.png')
+  const image = require('../../../common/assets/Footprint.png')
   return (
     <LayoutContaier>
       <div className={style.dateChart}>
+        <h1 style={{ fontWeight: '500', color: '#222122' }}>Amprenta ta</h1>
         <div className={style.dateChart_Header}>
           <div>
             <img alt='footprint' src={image} />
           </div>
           <h3 className={style.dateChart_Details}>
-            Amprenta României a scăzut cu un total de 15 g de CO2 față de luna trecută.
+            Amprenta ta a scăzut cu un total de 3kg de CO2 față de luna trecută. Continuă tot așa!
           </h3>
         </div>
         <Line options={options} data={data} />

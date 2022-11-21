@@ -8,7 +8,7 @@ export const LayoutFooter = () => {
     <footer className='footer'>
       <div className='footer-content'>
         <div className='logo'>
-          <Logo />
+          <Logo width='200' />
         </div>
         <span className='footer-text'>
           Proiectul Amprenta este parte a concursului intern BIM organizat de ASSIST Software SRL

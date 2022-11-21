@@ -1,4 +1,4 @@
-import { Navbar } from 'react-bootstrap'
+import { Navbar } from 'layout/layout-navbar/layout-navbar'
 import { StatisticCards } from '../statistic-card/statistics-card'
 import { ChartDate } from '../statistic-chart-date/statistic-chart-date'
 import { LocalChart } from '../statistici-chart-local/statistici-chart-local'
