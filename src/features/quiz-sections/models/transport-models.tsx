@@ -25,3 +25,22 @@ export type Household = {
   wood: number
   footprint_id?: number
 }
+export type Food = {
+  beef: number
+  lamb: number
+  poultry: number
+  pork: number
+  fish: number
+  milk_based: number
+  cheese: number
+  eggs: number
+  coffee: number
+  vegetables: number
+  bread: number
+  footprint_id: number
+}
+export type Result = {
+  transportation_carbon_footprint: number
+  house_carbon_footprint: number
+  food_carbon_footprint: number
+}

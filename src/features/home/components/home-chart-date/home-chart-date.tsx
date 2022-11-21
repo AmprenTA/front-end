@@ -41,8 +41,8 @@ export const data = {
     {
       label: 'CALATORII',
       data: [12, 19, 3, 5],
-      borderColor: '#F78E91',
-      backgroundColor: '#F78E91',
+      borderColor: '#FF6064',
+      backgroundColor: '#FF6064',
       textColor: '#5B5B5B',
     },
     {

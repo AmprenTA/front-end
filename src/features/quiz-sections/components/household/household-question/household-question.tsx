@@ -1,7 +1,6 @@
 import api from 'common/api/api'
 import { Button } from 'common/components/Button/Button'
 import Input from 'common/components/Input/Input'
-import { PAGES_PATHS } from 'common/constants/constant'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
 import { question, stepperStyle } from 'features/quiz-sections/constants/constants'
@@ -10,10 +9,11 @@ import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import { useState } from 'react'
 import { Stepper } from 'react-form-stepper'
 import { useNavigate } from 'react-router-dom'
-
-import style from '../transport-questions/transport-question.module.scss'
-
-export const HouseholdQuestions = () => {
+import style from '../../transport/transport-questions/transport-question.module.scss'
+interface Props {
+  foodPrintId: any
+}
+export const HouseholdQuestions: React.FC<Props> = ({ ...props }) => {
   const [stepNumber, setStepNumber] = useState<number>(1)
   const [household, setHousehold] = useState<Household>({ electricity: 0, natural_gas: 0, wood: 0 })
 
@@ -50,7 +50,6 @@ export const HouseholdQuestions = () => {
               <Input
                 value={household.natural_gas}
                 name='natural_gas'
-                style={{ width: '530px' }}
                 type='number'
                 placeholder='EX: 15'
                 onChange={handleChangeInput}
@@ -68,7 +67,6 @@ export const HouseholdQuestions = () => {
               <Input
                 value={household.wood}
                 name='wood'
-                style={{ width: '530px' }}
                 type='number'
                 placeholder='EX: 15'
                 onChange={handleChangeInput}
@@ -102,13 +100,11 @@ export const HouseholdQuestions = () => {
       electricity: household.electricity,
       natural_gas: household.natural_gas,
       wood: household.wood,
-      footprint_id: 1,
+      footprint_id: props.foodPrintId,
     }
     try {
       const response: any = await api.post(`houses`, paylaod)
-      if (response === 201) {
-        navigate(PAGES_PATHS.FOOD_SECTION)
-      }
+      navigate(`/mancare/${response.data.footprint_id}`)
       return response
     } catch (err) {
       console.log('Error', err.response.data)

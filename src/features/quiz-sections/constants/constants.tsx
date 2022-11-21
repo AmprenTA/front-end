@@ -1,6 +1,6 @@
 import { CustomDropdownOptionValue } from 'common/components/DropeDown/DropeDown'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
-import style from '../components/transport-questions/transport-question.module.scss'
+import style from '../components/transport/transport-questions/transport-question.module.scss'
 
 export const carboranti: Array<CustomDropdownOptionValue> = [
   { value: 0, text: 'Disel' },
@@ -36,7 +36,13 @@ export const tarnsportOptions: Array<CustomDropdownOptionValue> = [
   { value: 0, text: 'Tren' },
   { value: 1, text: 'Autobuz' },
 ]
-export const question = (number: number, question: string, children: any, width: string) => {
+export const question = (
+  number: number,
+  question: string,
+  children: any,
+  width: string,
+  marginLeft?: any,
+) => {
   return (
     <div className={style.transportQuestion_Question}>
       <div style={{ display: 'flex', width: '100%' }}>
@@ -49,7 +55,7 @@ export const question = (number: number, question: string, children: any, width:
         </span>
       </div>
       <div className={style.transportQuestion_QuestionChildren}>
-        <div style={{ width: width }}>{children}</div>
+        <div style={{ width: width, marginLeft: marginLeft }}>{children}</div>
       </div>
     </div>
   )

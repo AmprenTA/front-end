@@ -17,7 +17,7 @@ export const InfoSection = () => {
     <LayoutContaier>
       <div className='info-container' data-aos='fade-right'>
         <div>
-          <h3 className='card-header' style={{ backgroundColor: '#F78E91' }}>
+          <h3 className='card-header' style={{ backgroundColor: '#FF6064' }}>
             Ce este amprenta de carbon?
           </h3>
           <div className='card'>
@@ -77,7 +77,7 @@ export const InfoSection = () => {
               <img alt='footprint' src={carbonFootrpint} />
             </div>
           </div>
-          <button className='button-try'>
+          <button className='button-try' style={{ background: '#ACD3E2' }}>
             Încearcă acum
             <ArrowRight />
           </button>

@@ -3,7 +3,6 @@ import { Button } from 'common/components/Button/Button'
 import { CheckBoxItem } from 'common/components/CheckBox/CheckBox'
 import { DropeDown } from 'common/components/DropeDown/DropeDown'
 import Input from 'common/components/Input/Input'
-import { PAGES_PATHS } from 'common/constants/constant'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
 import {
@@ -17,7 +16,7 @@ import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import React, { useEffect, useState } from 'react'
 import { Stepper } from 'react-form-stepper'
 import { useNavigate } from 'react-router-dom'
-import { ModalSection } from '../modal-section.tsx/modal-section'
+import { ModalSection } from '../../modal-section.tsx/modal-section'
 import style from './transport-question.module.scss'
 
 interface Props {
@@ -39,7 +38,21 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
 
   useEffect(() => {
     if (stepNumber === 1 && newBas === 'Nu') {
-      navigate(PAGES_PATHS.HOUSEHOLD_SECTION)
+      const addTransport = async () => {
+        const paylaod: Transport = {
+          cars: props.arrayOfCars,
+          flights: props.multipleFly,
+          public_transports: multipleBus,
+        }
+        try {
+          const response: any = await api.post(`transportations`, paylaod)
+          navigate(`/gospodarie/${response.data.footprint_id}`)
+          return response.data.footprint_id
+        } catch (err) {
+          console.log('Error', err.response.data)
+        }
+      }
+      addTransport()
     }
   }, [checked, stepNumber])
 
@@ -161,15 +174,12 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
     }
     try {
       const response: any = await api.post(`transportations`, paylaod)
-      if (response === 201) {
-        navigate(PAGES_PATHS.HOUSEHOLD_SECTION)
-      }
-      return response
+      navigate(`/gospodarie/${response.data.footprint_id}`)
+      return response.data.footprint_id
     } catch (err) {
       console.log('Error', err.response.data)
     }
   }
-
   return (
     <ModalSection>
       <div className={style.transportQuestion}>

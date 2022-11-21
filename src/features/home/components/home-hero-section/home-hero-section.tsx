@@ -82,7 +82,7 @@ export const HeroSection = () => {
             {!showAnimation ? (
               <>
                 {' '}
-                <div style={{ background: '#F78E91' }} className='square-dots'>
+                <div style={{ background: '#FF6064' }} className='square-dots'>
                   <div className={'loader'}>
                     <span className={'loaderDot'}></span>
                     <span className={'loaderDot'}></span>
@@ -93,7 +93,7 @@ export const HeroSection = () => {
             ) : (
               <>
                 {' '}
-                <div style={{ background: '#F78E91' }} className='square-animated'>
+                <div style={{ background: '#FF6064' }} className='square-animated'>
                   <div className={'loader'}>
                     <span className='title-square'>Ce este carbon footprint?</span>
                   </div>{' '}

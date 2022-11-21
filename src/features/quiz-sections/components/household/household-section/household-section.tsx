@@ -1,17 +1,20 @@
 import { Step, Stepper } from 'react-form-stepper'
-import { ModalSection } from '../modal-section.tsx/modal-section'
-import styles from './transport-section.module.scss'
+import { ModalSection } from '../../modal-section.tsx/modal-section'
+import styles from '../../transport-section/transport-section.module.scss'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { useState } from 'react'
-import { TransportQuestions } from '../transport-questions/transport-questions-car'
-import { Button } from 'primereact/button'
+import { HouseholdQuestions } from '../household-question/household-question'
+import { Button } from 'common/components/Button/Button'
 import { Back } from 'common/assets/icons/ArrowLeft'
 import { useNavigate } from 'react-router-dom'
 import { PAGES_PATHS } from 'common/constants/constant'
-export const TransportSection = () => {
+import { useParams } from 'react-router-dom'
+
+export const HouseHoldSection = () => {
+  const { id } = useParams()
   const [showQuiz, setShowQuiz] = useState(false)
   const navigate = useNavigate()
-  const car = require('../../assets/Car.png')
+  const car = require('../../../assets/Energy.png')
   return (
     <ModalSection>
       <div className={styles.transportSection_ModalBody}>
@@ -20,15 +23,14 @@ export const TransportSection = () => {
             icon={<Back />}
             className={styles.transportSection_BackButton}
             onClick={() => {
-              navigate(PAGES_PATHS.HOME)
+              navigate(PAGES_PATHS.TRANSPORT_SECTION)
             }}>
             Back
           </Button>
         </div>
-
         {showQuiz ? (
           <>
-            <TransportQuestions />
+            <HouseholdQuestions foodPrintId={id} />
           </>
         ) : (
           <>
@@ -42,7 +44,7 @@ export const TransportSection = () => {
                 activeTextColor: '#FCD351',
                 inactiveTextColor: '#e0e0e0',
               }}
-              activeStep={1}>
+              activeStep={2}>
               <Step label='Calatorii' />
               <Step label='Gospodarie' />
               <Step label='Alimentatie' />
@@ -52,8 +54,8 @@ export const TransportSection = () => {
                 <img alt='car' src={car} />
               </div>
               <span className={styles.transportSection_Info}>
-                Prima secțiune este legată de călătorii. Te rugăm să fii cât mai exact posibil în
-                oferirea informațiilor.
+                Felicitări, ai terminat secțiunea de călătorii. Acum urmează secțiunea de
+                gospodărie.
               </span>
               <div>
                 <button

@@ -1,34 +1,24 @@
 import { Step, Stepper } from 'react-form-stepper'
-import { ModalSection } from '../modal-section.tsx/modal-section'
-import styles from '../transport-section/transport-section.module.scss'
+import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
+import { UpArrow } from 'features/quiz/assets/icons/UpArrow'
+import { ModalSection } from '../../modal-section.tsx/modal-section'
+import { Button } from 'primereact/button'
+import styles from '../../transport-section/transport-section.module.scss'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { useState } from 'react'
-import { HouseholdQuestions } from '../household-question/household-question'
-import { Button } from 'common/components/Button/Button'
-import { Back } from 'common/assets/icons/ArrowLeft'
-import { useNavigate } from 'react-router-dom'
-import { PAGES_PATHS } from 'common/constants/constant'
+import { FoodQuestions } from '../food-questions/food-questions'
+import { useParams } from 'react-router-dom'
 
-export const HouseHoldSection = () => {
+export const FoodSection = () => {
+  const { id } = useParams()
   const [showQuiz, setShowQuiz] = useState(false)
-  const navigate = useNavigate()
-  const car = require('../../assets/Energy.png')
+  const car = require('../../../assets/Food.png')
   return (
     <ModalSection>
       <div className={styles.transportSection_ModalBody}>
-        <div className={styles.transportSection_BackButtonContainer}>
-          <Button
-            icon={<Back />}
-            className={styles.transportSection_BackButton}
-            onClick={() => {
-              navigate(PAGES_PATHS.TRANSPORT_SECTION)
-            }}>
-            Back
-          </Button>
-        </div>
         {showQuiz ? (
           <>
-            <HouseholdQuestions />
+            <FoodQuestions footPrintId={id!} />
           </>
         ) : (
           <>
@@ -42,7 +32,7 @@ export const HouseHoldSection = () => {
                 activeTextColor: '#FCD351',
                 inactiveTextColor: '#e0e0e0',
               }}
-              activeStep={2}>
+              activeStep={3}>
               <Step label='Calatorii' />
               <Step label='Gospodarie' />
               <Step label='Alimentatie' />
@@ -52,8 +42,8 @@ export const HouseHoldSection = () => {
                 <img alt='car' src={car} />
               </div>
               <span className={styles.transportSection_Info}>
-                Felicitări, ai terminat secțiunea de călătorii. Acum urmează secțiunea de
-                gospodărie.
+                Felicitări, ai terminat secțiunea de gospodărie. Acum urmează secțiunea de
+                alimentație.
               </span>
               <div>
                 <button
@@ -64,6 +54,10 @@ export const HouseHoldSection = () => {
                   <ArrowRight />
                 </button>
               </div>
+            </div>
+            <div className={styles.transportSection_Footer}>
+              <Button className={styles.transportSection_DownArrow} icon={<DownArrow />} />
+              <Button className={styles.transportSection_UpArrow} icon={<UpArrow />} />
             </div>
           </>
         )}

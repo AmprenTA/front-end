@@ -7,7 +7,8 @@ import { Car, Fly } from 'features/quiz-sections/models/transport-models'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import React, { useEffect, useState } from 'react'
 import { Stepper } from 'react-form-stepper'
-import { ModalSection } from '../modal-section.tsx/modal-section'
+
+import { ModalSection } from '../../modal-section.tsx/modal-section'
 import { TransportBus } from './transport-question-bus'
 import style from './transport-question.module.scss'
 
@@ -20,6 +21,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
   const [stepNumber, setStepNumber] = useState<number>(1)
   const [newFly, setNewFly] = useState<string>('')
   const [multipleFly, setMultipleFly] = useState<Array<Fly>>([])
+
   const [fly, setFly] = useState<Fly>({
     from: '',
     to: '',
