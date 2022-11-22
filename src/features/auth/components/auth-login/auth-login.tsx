@@ -26,7 +26,6 @@ export const Login = () => {
   const { control, handleSubmit, reset } = useForm({ defaultValues })
 
   const onSubmit = async (data: any) => {
-    console.log(data)
     const payload: LoginUser = {
       email: data.email,
       password: data.password,
@@ -34,10 +33,9 @@ export const Login = () => {
     try {
       const response: any = await api.post(`users/sign_in`, payload)
       if (response.status === 201) {
-        localStorage.setItem('user', JSON.stringify(response.data.auth_token))
+        localStorage.setItem('token', JSON.stringify(response.data.auth_token))
         navigate(PAGES_PATHS.HOME)
       }
-      console.log(response)
       return response
     } catch (err) {
       if (err.response.status === 401) {

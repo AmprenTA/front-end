@@ -89,6 +89,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
                 name='from'
                 placeholder={'Selectează carburant'}
                 options={orase}
+                value={fly.from}
                 onChange={handleChangeDropeDown}
               />,
               '306px',
@@ -105,6 +106,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
                 name='to'
                 placeholder={'Selectează carburant'}
                 options={orase}
+                value={fly.to}
                 onChange={handleChangeDropeDown}
               />,
               '306px',

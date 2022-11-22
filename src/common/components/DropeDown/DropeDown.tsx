@@ -20,6 +20,7 @@ export const DropeDown: React.FC<Props> = ({ ...props }) => {
         value={props.value}
         placeholder={props.placeholder}>
         {props.options.map((item, key) => {
+          console.log(item.value)
           return (
             <option key={key} value={item.value} className={style.dropeDown_Options}>
               {item.text}

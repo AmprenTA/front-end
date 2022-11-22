@@ -97,10 +97,10 @@ export const HouseholdQuestions: React.FC<Props> = ({ ...props }) => {
   }
   const handleSubmit = async () => {
     const paylaod: Household = {
-      electricity: household.electricity,
-      natural_gas: household.natural_gas,
-      wood: household.wood,
-      footprint_id: props.foodPrintId,
+      electricity: +household.electricity,
+      natural_gas: +household.natural_gas,
+      wood: +household.wood,
+      footprint_id: +props.foodPrintId,
     }
     try {
       const response: any = await api.post(`houses`, paylaod)

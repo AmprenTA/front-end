@@ -67,7 +67,7 @@ export const HeroSection = () => {
               e.preventDefault()
               setShowModal(true)
             }}>
-            Înregistrează-te
+            Calculeaza
             <ArrowRight />
           </button>
           <p className='account'>

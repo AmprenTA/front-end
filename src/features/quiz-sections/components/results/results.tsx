@@ -24,6 +24,7 @@ export const Results = () => {
       })
     })
   }, [id])
+  const token = localStorage.getItem('token')
   return (
     <ModalSection>
       <div className={styles.result_ModalBody}>
@@ -37,14 +38,18 @@ export const Results = () => {
           Înregistrează-te pentru a-ți salva progresul, pentru a-ți compara rezultatele cu alte
           persoane din zona ta, dar și pentru mai multe predicții și informații.
         </h3>
-        <button
-          className='button-try'
-          onClick={(e) => {
-            navigate(PAGES_PATHS.REGISTER)
-          }}>
-          Înregistrează-te
-          <ArrowRight />
-        </button>
+        {token ? (
+          ''
+        ) : (
+          <button
+            className='button-try'
+            onClick={(e) => {
+              navigate(PAGES_PATHS.REGISTER)
+            }}>
+            Înregistrează-te
+            <ArrowRight />
+          </button>
+        )}
       </div>
     </ModalSection>
   )

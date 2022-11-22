@@ -30,6 +30,7 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
     bread: 0,
     footprint_id: 0,
   })
+
   const navigate = useNavigate()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target
@@ -48,7 +49,7 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
       coffee: +food.coffee,
       vegetables: +food.vegetables,
       bread: +food.bread,
-      footprint_id: props.footPrintId,
+      footprint_id: +props.footPrintId,
     }
     try {
       const response: any = await api.post(`foods`, paylaod)
@@ -92,7 +93,7 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
             {question(
               3,
               'Cât de des mănânci carne de pui? (100g porția) ?',
-              <RadioButton name={'poultry'} value={+food.poultry} handleChange={handleChange} />,
+              <RadioButton name='poultry' value={+food.poultry} handleChange={handleChange} />,
               '80%',
               '-26px',
             )}
@@ -221,6 +222,7 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
         )
     }
   }
+
   const isValid = () => {
     switch (stepNumber) {
       case 1:
@@ -228,7 +230,7 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
       case 2:
         return food.lamb > 0 ? false : true
       case 3:
-        return food.poultry > 0 ? false : true
+        return food.poultry > 0 ? false : false
       case 4:
         return food.pork > 0 ? false : true
       case 5:
@@ -249,7 +251,7 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
         return false
 
       default:
-        return true
+        return false
     }
   }
   return (
@@ -277,12 +279,8 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
         <div>{getStepContent(stepNumber)}</div>
         <div className={style.transportQuestion_Footer}>
           <Button
-            disabled={isValid() || stepNumber === 3}
-            style={
-              isValid() || stepNumber === 3
-                ? { background: '#EEEEEE', border: '2px solid #959595' }
-                : null
-            }
+            disabled={isValid()}
+            style={isValid() ? { background: '#EEEEEE', border: '2px solid #959595' } : null}
             onClick={() => {
               setStepNumber(stepNumber + 1)
             }}
