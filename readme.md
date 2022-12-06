@@ -9,7 +9,7 @@
 2. Naming general rules
 3. Naming inside a feature folder
 4. Naming
-5. 
+5. Testing
 
 ## Folder structure
 
