@@ -22,6 +22,7 @@ import style from './transport-question.module.scss'
 interface Props {
   multipleFly: Array<Fly>
   arrayOfCars: Array<Car>
+  location: string
 }
 export const TransportBus: React.FC<Props> = ({ ...props }) => {
   const [checked, setChecked] = React.useState<string>('')
@@ -40,6 +41,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
     if (stepNumber === 1 && newBas === 'Nu') {
       const addTransport = async () => {
         const paylaod: Transport = {
+          location: props.location,
           cars: props.arrayOfCars,
           flights: props.multipleFly,
           public_transports: multipleBus,
@@ -168,6 +170,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
   }
   const handleSubmitAnswers = async () => {
     const paylaod: Transport = {
+      location: props.location,
       cars: props.arrayOfCars,
       flights: props.multipleFly,
       public_transports: multipleBus,

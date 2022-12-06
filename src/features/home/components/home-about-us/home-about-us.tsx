@@ -7,6 +7,7 @@ export const AboutUs = () => {
   const Anastasia = require('../../assests/Anastasia.jpg')
   const Nelu = require('../../assests/Nelu.png')
   const Steps = require('../../assests/Steps.png')
+  const Caludiu = require('../../assests/Claudiu.png')
   return (
     <LayoutContaier>
       <div className='about-us'>
@@ -27,9 +28,12 @@ export const AboutUs = () => {
               <img alt='Nadejda' src={Anastasia} />
             </div>
           </div>
-          <div className='first-union third'>
+          <div className='first-union'>
             <div className='image-wrapper Nadejda'>
               <img alt='Nadejda' src={Nelu} />
+            </div>
+            <div className='image-wrapper Anastasia'>
+              <img alt='Nadejda' src={Caludiu} />
             </div>
           </div>
         </div>

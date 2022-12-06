@@ -17,6 +17,7 @@ export type Transport = {
   cars: Array<Car>
   flights: Array<Fly>
   public_transports: Array<Bus>
+  location: string
 }
 
 export type Household = {
@@ -42,5 +43,9 @@ export type Food = {
 export type Result = {
   transportation_carbon_footprint: number
   house_carbon_footprint: number
-  food_carbon_footprint: number
+  food_carbon_footprint: {
+    average: number
+    min: number
+    max: number
+  }
 }

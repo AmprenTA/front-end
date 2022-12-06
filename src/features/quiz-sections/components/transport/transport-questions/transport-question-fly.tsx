@@ -15,6 +15,7 @@ import style from './transport-question.module.scss'
 
 interface Props {
   arrayOfCars: Array<Car>
+  location: string
 }
 
 export const TransportFly: React.FC<Props> = ({ ...props }) => {
@@ -171,12 +172,16 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
         <div className={style.transportQuestion_Body}>
           {showBusQuestion ? (
             <>
-              <TransportBus multipleFly={multipleFly} arrayOfCars={props.arrayOfCars} />
+              <TransportBus
+                location={props.location}
+                multipleFly={multipleFly}
+                arrayOfCars={props.arrayOfCars}
+              />
             </>
           ) : (
             <>
               <Stepper
-                steps={[{ label: '.' }, { label: '.' }, { label: '.' }, { label: '.' }]}
+                steps={[{ label: '1.' }, { label: '2.' }, { label: '3.' }, { label: '4.' }]}
                 className={style.transportQuestion_Stepper}
                 connectorStyleConfig={{ activeColor: '#509046' }}
                 styleConfig={stepperStyle}

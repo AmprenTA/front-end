@@ -16,6 +16,9 @@ export const HeroSection = () => {
   const move = require('../../assests/Move.png')
   const moveYellow = require('../../assests/pointer.png')
   const moveGreen = require('../../assests/MoveGreen.png')
+  const Foot1 = require('../../assests/Foot1.png')
+  const Foot2 = require('../../assests/Foot2.png')
+  const earth = require('../../assests/earth.png')
   useEffect(() => {
     let timer1 = setTimeout(() => setShowAnimation(true), 2000)
     return () => {
@@ -63,53 +66,70 @@ export const HeroSection = () => {
           </p>
           <button
             className='button-try'
+            style={{ width: '200px', fontWeight: '500' }}
             onClick={(e) => {
               e.preventDefault()
               setShowModal(true)
             }}>
-            Calculeaza
+            Calculează
             <ArrowRight />
           </button>
           <p className='account'>
-            Nu vrei să ai un cont?<span className='sign-in'> Continuă neînregistrat</span>
+            Vrei să îți salvezi progresul?<span className='sign-in'> Înregistrează-te</span>
           </p>
         </div>
         <div>
-          <div>
+          <div className='hero-first-section'>
             <div>
-              <img alt='purple' src={move} />
-            </div>
-            {!showAnimation ? (
-              <>
-                {' '}
-                <div style={{ background: '#FF6064' }} className='square-dots'>
-                  <div className={'loader'}>
-                    <span className={'loaderDot'}></span>
-                    <span className={'loaderDot'}></span>
-                    <span className={'loaderDot'}></span>
+              {' '}
+              <div>
+                <img alt='purple' src={move} />
+              </div>
+              {!showAnimation ? (
+                <>
+                  {' '}
+                  <div style={{ background: '#FF6064' }} className='square-dots'>
+                    <div className={'loader'}>
+                      <span className={'loaderDot'}></span>
+                      <span className={'loaderDot'}></span>
+                      <span className={'loaderDot'}></span>
+                    </div>
                   </div>
-                </div>
-              </>
-            ) : (
-              <>
-                {' '}
-                <div style={{ background: '#FF6064' }} className='square-animated'>
-                  <div className={'loader'}>
-                    <span className='title-square'>Ce este carbon footprint?</span>
-                  </div>{' '}
-                </div>
-              </>
-            )}
-          </div>
-
-          <div className='second-conatiner'>
-            <div>
-              <img alt='purple' src={moveYellow} />
+                </>
+              ) : (
+                <>
+                  {' '}
+                  <div style={{ background: '#FF6064' }} className='square-animated'>
+                    <div className={'loader'}>
+                      <span className='title-square'>Ce este carbon footprint?</span>
+                    </div>{' '}
+                  </div>
+                </>
+              )}
             </div>
-            <div
-              style={{ background: '#FCD351', width: '438px', color: '#5B5B5B' }}
-              className='square'>
-              <span>Cum calculez amprenta de carbon?</span>
+
+            <div>
+              <img alt='foot' src={Foot1} />
+            </div>
+          </div>
+          <div className='hero-first-section'>
+            <div>
+              <img alt='foot' src={Foot2} />
+            </div>
+            <div className='second-conatiner'>
+              <div>
+                <img alt='purple' src={moveYellow} />
+              </div>
+              <div
+                style={{ background: '#ACD3E2', width: '438px', color: '#5B5B5B' }}
+                className='square'>
+                <span>Cum calculez amprenta de carbon?</span>
+              </div>
+            </div>
+          </div>
+          <div className='hero-second-section'>
+            <div>
+              <img alt='foot' src={earth} />
             </div>
           </div>
           <div>

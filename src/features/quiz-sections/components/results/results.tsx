@@ -13,7 +13,11 @@ export const Results = () => {
   const [result, setResult] = useState<Result>({
     transportation_carbon_footprint: 0,
     house_carbon_footprint: 0,
-    food_carbon_footprint: 0,
+    food_carbon_footprint: {
+      average: 0,
+      min: 0,
+      max: 0,
+    },
   })
   useEffect(() => {
     api.get(`footprints/${id}`).then((res) => {
@@ -30,25 +34,30 @@ export const Results = () => {
       <div className={styles.result_ModalBody}>
         <h1 className={styles.result_Title}>Impactul tău asupra mediului este următorul:</h1>
         <Cards
-          alimentatie={Math.round(result.food_carbon_footprint)}
+          min={Math.round(result.food_carbon_footprint.min)}
+          max={Math.round(result.food_carbon_footprint.max)}
+          alimentatie={Math.round(result.food_carbon_footprint.average)}
           transport={Math.round(result.transportation_carbon_footprint)}
           gospodarie={Math.round(result.house_carbon_footprint)}
         />
-        <h3 className={styles.result_RegisterText}>
-          Înregistrează-te pentru a-ți salva progresul, pentru a-ți compara rezultatele cu alte
-          persoane din zona ta, dar și pentru mai multe predicții și informații.
-        </h3>
         {token ? (
           ''
         ) : (
-          <button
-            className='button-try'
-            onClick={(e) => {
-              navigate(PAGES_PATHS.REGISTER)
-            }}>
-            Înregistrează-te
-            <ArrowRight />
-          </button>
+          <>
+            {' '}
+            <h3 className={styles.result_RegisterText}>
+              Înregistrează-te pentru a-ți salva progresul, pentru a-ți compara rezultatele cu alte
+              persoane din zona ta, dar și pentru mai multe predicții și informații.
+            </h3>
+            <button
+              className='button-try'
+              onClick={(e) => {
+                navigate(PAGES_PATHS.REGISTER)
+              }}>
+              Înregistrează-te
+              <ArrowRight />
+            </button>
+          </>
         )}
       </div>
     </ModalSection>

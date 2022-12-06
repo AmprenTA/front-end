@@ -3,6 +3,8 @@ interface Props {
   alimentatie?: number
   transport?: number
   gospodarie?: number
+  min?: number
+  max?: number
 }
 export const Cards: React.FC<Props> = ({ ...props }) => {
   return (
@@ -24,6 +26,10 @@ export const Cards: React.FC<Props> = ({ ...props }) => {
             <div style={{ background: '#FCD351' }} className={styles.Card_Circle}>
               <span style={{ color: '#222212' }}>{props.alimentatie} kg</span>
             </div>
+          </div>
+          <div className={styles.Card_Min}>
+            <span>min: {props.min} kg</span>
+            <span>max: {props.max} kg</span>
           </div>
         </div>
       </div>

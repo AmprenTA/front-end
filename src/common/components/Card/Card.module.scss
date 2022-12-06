@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    height: 200px;
+    height: 220px;
     background: #fffef7;
 
     p {
@@ -35,7 +35,22 @@
     display: flex;
     width: 100%;
     justify-content: space-around;
+    flex-direction: column;
     align-items: center;
+  }
+
+  &_Min {
+    margin-top: 8px;
+    font-size: 16px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+
+    span {
+      padding: 2px 0;
+      font-weight: 500;
+    }
   }
 
   &_CircleSection {
