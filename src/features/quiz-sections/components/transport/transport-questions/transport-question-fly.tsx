@@ -1,8 +1,9 @@
+import api from 'common/api/api'
 import { Button } from 'common/components/Button/Button'
 import { CheckBoxItem } from 'common/components/CheckBox/CheckBox'
-import { DropeDown } from 'common/components/DropeDown/DropeDown'
+import { CustomDropdownOptionValue, DropeDown } from 'common/components/DropeDown/DropeDown'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
-import { answears, orase, question, stepperStyle } from 'features/quiz-sections/constants/constants'
+import { answears, question, stepperStyle } from 'features/quiz-sections/constants/constants'
 import { Car, Fly } from 'features/quiz-sections/models/transport-models'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import React, { useEffect, useState } from 'react'
@@ -15,17 +16,31 @@ import style from './transport-question.module.scss'
 interface Props {
   arrayOfCars: Array<Car>
 }
+
 export const TransportFly: React.FC<Props> = ({ ...props }) => {
   const [showBusQuestion, setShowBusQuestion] = useState<boolean>(false)
   const [checked, setChecked] = React.useState<string>('')
   const [stepNumber, setStepNumber] = useState<number>(1)
   const [newFly, setNewFly] = useState<string>('')
   const [multipleFly, setMultipleFly] = useState<Array<Fly>>([])
-
+  const [flyOptions, setFlyOptions] = useState<Array<any>>([])
   const [fly, setFly] = useState<Fly>({
     from: '',
     to: '',
   })
+
+  useEffect(() => {
+    const fetchFlyes = async () => {
+      const response: any = await api.get(`flights/airports`)
+      setFlyOptions(response.data)
+    }
+    fetchFlyes()
+  }, [])
+
+  const dropeDownFlyOptions: Array<CustomDropdownOptionValue> = flyOptions.map((fly) => ({
+    value: fly.id,
+    text: fly.name,
+  }))
   useEffect(() => {
     setChecked('')
     setNewFly('')
@@ -43,6 +58,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
   }
   const handleChangeDropeDown = (event: any) => {
     const { name, value } = event.target
+
     setFly({ ...fly!, [name]: value })
   }
   useEffect(() => {
@@ -52,9 +68,16 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
       setShowBusQuestion(false)
     }
   }, [checked, stepNumber])
+
   useEffect(() => {
-    const newArray = [...multipleFly]
-    newArray.push(fly)
+    const newArray: any = [...multipleFly]
+    const from = dropeDownFlyOptions.find((item) => item.value === +fly.from)
+    const to = dropeDownFlyOptions.find((item) => item.value === +fly.to)
+    const newFlyObj = {
+      from: from?.text,
+      to: to?.text,
+    }
+    newArray.push(newFlyObj)
 
     if (newFly === 'Da' && stepNumber === 4) {
       setFly({ from: '', to: '' })
@@ -88,7 +111,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
               <DropeDown
                 name='from'
                 placeholder={'Selectează carburant'}
-                options={orase}
+                options={dropeDownFlyOptions}
                 value={fly.from}
                 onChange={handleChangeDropeDown}
               />,
@@ -105,7 +128,7 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
               <DropeDown
                 name='to'
                 placeholder={'Selectează carburant'}
-                options={orase}
+                options={dropeDownFlyOptions}
                 value={fly.to}
                 onChange={handleChangeDropeDown}
               />,
