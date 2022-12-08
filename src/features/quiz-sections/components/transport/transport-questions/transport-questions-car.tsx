@@ -23,17 +23,42 @@ export const TransportQuestions = () => {
   const [stepNumber, setStepNumber] = useState<number>(1)
   const [haveCar, setHaveCar] = useState<string>(' ')
   const [carAnswers, setCarAnswear] = useState<Array<Car>>([])
+  const [countiesOptions, setCountiesOptions] = useState<Array<any>>([])
   const [locationsOptions, setLocationsOptions] = useState<Array<any>>([])
+  const [counties, setCounties] = useState<number>(0)
   const [location, setLocation] = useState<number>(0)
   const [car, setCar] = useState<Car>({
     fuel_type: 0,
     total_km: 0,
     fuel_consumption: 0,
   })
+  const countiesDownFlyOptions: Array<CustomDropdownOptionValue> = countiesOptions!.map(
+    (location) => ({
+      value: location!.id,
+      text: location!.name,
+    }),
+  )
+  const l = countiesDownFlyOptions.find((item) => item.value === +counties)
+
   useEffect(() => {
     const fetchFlyes = async () => {
-      const response: any = await api.get(`locations`)
+      const response: any = await api.get(`/locations?county=${l?.text!}`)
+      console.log(response.data)
       setLocationsOptions(response.data)
+    }
+    fetchFlyes()
+  }, [l?.text])
+
+  const locationsDownFlyOptions: Array<CustomDropdownOptionValue> = locationsOptions!.map(
+    (location) => ({
+      value: location!.id,
+      text: location!.name,
+    }),
+  )
+  useEffect(() => {
+    const fetchFlyes = async () => {
+      const response: any = await api.get(`/locations/counties`)
+      setCountiesOptions(response.data)
     }
     fetchFlyes()
   }, [])
@@ -44,7 +69,7 @@ export const TransportQuestions = () => {
   }, [stepNumber])
 
   useEffect(() => {
-    if (stepNumber === 2 && haveCar === 'Nu') {
+    if (stepNumber === 3 && haveCar === 'Nu') {
       const cars = {
         fuel_type: 0,
         fuel_consumption: 0,
@@ -57,12 +82,6 @@ export const TransportQuestions = () => {
       setShowFlyQuestion(false)
     }
   }, [checked, stepNumber])
-  const locationsDownFlyOptions: Array<CustomDropdownOptionValue> = locationsOptions!.map(
-    (location) => ({
-      value: location!.id,
-      text: location!.name,
-    }),
-  )
 
   ///in acest array vor fi salvate toate masinile adaugate
   useEffect(() => {
@@ -75,12 +94,12 @@ export const TransportQuestions = () => {
     }
     newArray.push(newCar)
 
-    if (haveCar === 'Da' && stepNumber === 6) {
+    if (haveCar === 'Da' && stepNumber === 7) {
       setCar({ fuel_type: 0, total_km: 0, fuel_consumption: 0 })
       setCarAnswear(newArray)
-      setStepNumber(3)
+      setStepNumber(4)
     }
-    if (haveCar === 'Nu' && stepNumber === 6) {
+    if (haveCar === 'Nu' && stepNumber === 7) {
       setCarAnswear(newArray)
       setShowFlyQuestion(true)
     }
@@ -88,6 +107,9 @@ export const TransportQuestions = () => {
 
   const handleChangeDropeDown = (event: any) => {
     setCar({ ...car!, fuel_type: event.target.value })
+  }
+  const handleChangeDropeDownCounties = (event: any) => {
+    setCounties(+event.target.value)
   }
   const handleChangeDropeDownLocations = (event: any) => {
     setLocation(+event.target.value)
@@ -110,23 +132,25 @@ export const TransportQuestions = () => {
   const isValid = () => {
     switch (stepNumber) {
       case 1:
-        return location > 0 ? false : true
+        return counties > 0 ? false : true
       case 2:
-        return haveCar !== '' ? false : true
+        return counties > 0 ? false : true
       case 3:
-        return car!.total_km > 0 ? false : true
+        return haveCar !== '' ? false : true
       case 4:
-        return car.fuel_type > 0 ? false : true
+        return car!.total_km > 0 ? false : true
       case 5:
-        return car!.fuel_consumption > 0 ? false : true
+        return car.fuel_type > 0 ? false : true
       case 6:
+        return car!.fuel_consumption > 0 ? false : true
+      case 7:
         return false
 
       default:
         return true
     }
   }
-
+  const locationX = countiesDownFlyOptions.find((item) => item.value === +location)
   function getStepContent(step: number) {
     switch (step) {
       case 1:
@@ -134,13 +158,13 @@ export const TransportQuestions = () => {
           <div className={style.transportQuestion_QuestionContainer}>
             {question(
               1,
-              'Din ce localitate esti ?',
+              'Din ce judet esti ?',
               <DropeDown
                 name='fuel_type'
                 placeholder={'Selectează carburant'}
-                options={locationsDownFlyOptions}
-                onChange={handleChangeDropeDownLocations}
-                value={location}
+                options={countiesDownFlyOptions}
+                onChange={handleChangeDropeDownCounties}
+                value={counties}
               />,
               '306px',
             )}
@@ -151,8 +175,14 @@ export const TransportQuestions = () => {
           <div className={style.transportQuestion_QuestionContainer}>
             {question(
               2,
-              'Deții o mașină?',
-              <CheckBoxItem cheked={checked} onChange={handleCheckbox} answears={answears} />,
+              'Din ce localitate esti ?',
+              <DropeDown
+                name='fuel_type'
+                placeholder={'Selectează carburant'}
+                options={locationsDownFlyOptions}
+                onChange={handleChangeDropeDownLocations}
+                value={counties}
+              />,
               '306px',
             )}
           </div>
@@ -162,6 +192,17 @@ export const TransportQuestions = () => {
           <div className={style.transportQuestion_QuestionContainer}>
             {question(
               3,
+              'Deții o mașină?',
+              <CheckBoxItem cheked={checked} onChange={handleCheckbox} answears={answears} />,
+              '306px',
+            )}
+          </div>
+        )
+      case 4:
+        return (
+          <div className={style.transportQuestion_QuestionContainer}>
+            {question(
+              4,
               'Câți km ai parcurs (în medie) în ultima lună?',
               <Input
                 icon={false}
@@ -175,11 +216,11 @@ export const TransportQuestions = () => {
             )}
           </div>
         )
-      case 4:
+      case 5:
         return (
           <div className={style.transportQuestion_QuestionContainer}>
             {question(
-              4,
+              5,
               'Ce tip de carburant folosești?',
               <DropeDown
                 name='fuel_type'
@@ -192,11 +233,11 @@ export const TransportQuestions = () => {
             )}
           </div>
         )
-      case 5:
+      case 6:
         return (
           <div className={style.transportQuestion_QuestionContainer}>
             {question(
-              5,
+              6,
               'Cât carburant consumă mașina în medie, pe lună? (litri/kwh)?',
               <Input
                 style={{ marginTop: '20px' }}
@@ -209,11 +250,11 @@ export const TransportQuestions = () => {
             )}
           </div>
         )
-      case 6:
+      case 7:
         return (
           <div className={style.transportQuestion_QuestionContainer}>
             {question(
-              6,
+              7,
               'Mai ai o mașină pe care vrei să o adaugi?',
               <CheckBoxItem
                 cheked={checked}
@@ -233,13 +274,11 @@ export const TransportQuestions = () => {
         return 'Unknown step'
     }
   }
-  const l = locationsDownFlyOptions.find((item) => item.value === +location)
-  console.log(l)
   return (
     <div className={style.transportQuestion}>
       <div className={style.transportQuestion_Body}>
         {showFlyQuestion ? (
-          <TransportFly arrayOfCars={carAnswers} location={l!.text} />
+          <TransportFly arrayOfCars={carAnswers} location={locationX!.text} />
         ) : (
           <>
             <Stepper
@@ -250,6 +289,7 @@ export const TransportQuestions = () => {
                 { label: '4.' },
                 { label: '5.' },
                 { label: '6.' },
+                { label: '7.' },
               ]}
               className={style.transportQuestion_Stepper}
               connectorStyleConfig={{ activeColor: '#509046' }}
@@ -257,7 +297,7 @@ export const TransportQuestions = () => {
               activeStep={stepNumber}></Stepper>
             <div>{getStepContent(stepNumber)}</div>
             <div className={style.transportQuestion_Footer}>
-              {stepNumber === 6 ? (
+              {stepNumber === 7 ? (
                 <></>
               ) : (
                 <Button
