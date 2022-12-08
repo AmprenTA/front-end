@@ -10,6 +10,7 @@ import { StatisticLanding } from 'features/statistics/components/statistic-landi
 import { Results } from 'features/quiz-sections/components/results/results'
 import { UserDashboard } from 'features/user-dashboard/user-landing-page/user-landing-page'
 import { Donation } from 'features/donation/components/donation-landing-page/donation-landing-page'
+import { ChartLanding } from 'features/chart/components/chart-landing'
 
 export const PageRouter = () => {
   return (
@@ -24,6 +25,7 @@ export const PageRouter = () => {
       <Route path={PAGES_PATHS.RESULT} element={<Results />} />
       <Route path={PAGES_PATHS.USER_DASHBOARD} element={<UserDashboard />} />
       <Route path={PAGES_PATHS.DONATION} element={<Donation />} />
+      <Route path={PAGES_PATHS.GENERAL_STATISTIC} element={<ChartLanding />} />
     </Routes>
   )
 }

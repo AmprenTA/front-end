@@ -1,0 +1,38 @@
+.local {
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+  &_Title {
+    color: #222122;
+    font-size: 40px;
+    font-weight: 500;
+  }
+
+  &_Details {
+    color: #5b5b5b;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &_InputContainer {
+    display: flex;
+    width: 93%;
+    justify-content: flex-end;
+    margin: 0;
+  }
+
+  &_Input {
+    margin: 0;
+    display: -ms-flexbox;
+    display: flex;
+    width: 260px;
+    height: 32px;
+    position: relative;
+    border-radius: 8px;
+    border: 2px solid #222122;
+    background: #fffef7;
+    margin-top: 6px;
+    cursor: pointer;
+    padding: 0 16px;
+  }
+}

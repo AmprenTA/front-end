@@ -11,4 +11,5 @@ export const PAGES_PATHS = {
   RESULT: '/rezultate/:id',
   DONATION: '/donatii',
   USER_DASHBOARD: '/dashboard',
+  GENERAL_STATISTIC: '/statistici-generale',
 }

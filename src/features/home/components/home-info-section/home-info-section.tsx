@@ -65,7 +65,7 @@ export const InfoSection = () => {
         <h3 className='card-header' style={{ backgroundColor: '#FCD351' }}>
           Cum calculez amprenta de carbon?
         </h3>
-        <div className='card' style={{ height: '200px' }}>
+        <div className='card'>
           <div className='description'>
             <p className='first-p'>
               Amprenta este mai mult decât un calculator inteligent cu ajutorul căruia poți să-ți

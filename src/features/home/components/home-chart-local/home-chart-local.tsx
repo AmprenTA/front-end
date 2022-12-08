@@ -1,79 +1,61 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js'
-import { Line } from 'react-chartjs-2'
+import Aos from 'aos'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { DropeDown } from 'common/components/DropeDown/DropeDown'
 import { LayoutContaier } from 'layout/layout-container/layout-container'
-import style from './home-chart-local.module.scss'
 import { useEffect } from 'react'
-import AOS from 'aos'
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
+import { Pie } from 'react-chartjs-2'
+import style from './home-chart-date.module.scss'
+ChartJS.register(ArcElement, Tooltip, Legend)
 
-export const options = {
-  responsive: true,
-  borderWidth: '4',
-  pointRadius: '8',
-  backgroundColor: '#ffff',
-  plugins: {
-    legend: {
-      position: 'bottom' as const,
-      padding: 55,
-      labels: {
-        // This more specific font property overrides the global property
-        font: {
-          size: 13,
-          family: 'IBM Plex Sans',
-        },
+interface Props {
+  date: any
+  optionsDropeDown: Array<any>
+  dropeDownValue: any
+  setDropeDownValue: (drope: any) => void
+}
+export const HomeChartLocal: React.FC<Props> = ({ date, optionsDropeDown, ...props }) => {
+  const image = require('../../../../common/assets/Footprint.png')
+  useEffect(() => {
+    Aos.init({ duration: 2000 })
+  }, [])
+  const options = {
+    responsive: true,
+    borderWidth: '4',
+    pointRadius: '8',
+    backgroundColor: '#ffff',
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom' as const,
       },
     },
-  },
-}
-
-export const data = {
-  labels: ['01.07.2022', '11.07.2022', '21.07.2022', '31.07.2022'],
-  datasets: [
-    {
-      label: 'CALATORII',
-      data: [12, 19, 3, 5],
-      borderColor: '#FF6064',
-      backgroundColor: '#FF6064',
-      textColor: '#5B5B5B',
-    },
-    {
-      label: 'GOSPODARIE',
-      data: [0, 5, 13, 8],
-      borderColor: '#509046',
-      backgroundColor: '#509046',
-      textColor: '#5B5B5B',
-    },
-    {
-      label: 'ALIMENATIE',
-      data: [0, 8, 10, 20],
-      borderColor: '#FCD351',
-      backgroundColor: '#FCD351',
-      textColor: '#5B5B5B',
-    },
-  ],
-}
-
-export function HomeChart() {
-  useEffect(() => {
-    AOS.init({ duration: 2000 })
-  }, [])
+  }
+  const handleChangeDropeDownCounties = (event: any) => {
+    props.setDropeDownValue(+event.target.value)
+  }
   return (
     <LayoutContaier>
-      <div className={style.local} data-aos='fade-right'>
-        <h2 className={style.local_Title}>Statistici</h2>
-        <h3 className={style.local_Details}>
-          În baza informațiilor adunate, AmprenTA prezice următoarea evoluție la nivelul local:
-        </h3>
-        <Line options={options} data={data} />
+      <div className={style.dateChart} data-aos='fade-left'>
+        <div className={style.dateChart_Header}>
+          <div>
+            <img alt='footprint' src={image} />
+          </div>
+          <div className={style.dateChart_DropeDownContainer}>
+            <div className={style.dateChart_Details}>Amprenta la nivel Local</div>
+            <div>
+              {' '}
+              <DropeDown
+                placeholder={''}
+                options={optionsDropeDown}
+                onChange={handleChangeDropeDownCounties}
+                value={props.dropeDownValue}
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <Pie width={400} height={400} options={options} data={date} />
+        </div>
       </div>
     </LayoutContaier>
   )

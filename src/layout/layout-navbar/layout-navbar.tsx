@@ -31,6 +31,10 @@ export const Navbar = () => {
       text: 'Despre noi',
       path: PAGES_PATHS.HOME,
     },
+    {
+      text: 'Statistici',
+      path: PAGES_PATHS.GENERAL_STATISTIC,
+    },
   ]
   const navLinks = !token ? navbarLinks : navbarLinksAuth
   const renderNavbarItems = () => {

@@ -43,7 +43,6 @@ export const TransportQuestions = () => {
   useEffect(() => {
     const fetchFlyes = async () => {
       const response: any = await api.get(`/locations?county=${l?.text!}`)
-      console.log(response.data)
       setLocationsOptions(response.data)
     }
     fetchFlyes()
@@ -181,7 +180,7 @@ export const TransportQuestions = () => {
                 placeholder={'Selectează carburant'}
                 options={locationsDownFlyOptions}
                 onChange={handleChangeDropeDownLocations}
-                value={counties}
+                value={location}
               />,
               '306px',
             )}
