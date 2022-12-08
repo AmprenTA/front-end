@@ -18,6 +18,10 @@ export const Navbar = () => {
       path: PAGES_PATHS.DONATION,
     },
     {
+      text: 'Statistici Generale',
+      path: PAGES_PATHS.GENERAL_STATISTIC,
+    },
+    {
       text: 'Amprenta mea',
       path: PAGES_PATHS.USER_DASHBOARD,
     },
@@ -32,7 +36,7 @@ export const Navbar = () => {
       path: PAGES_PATHS.HOME,
     },
     {
-      text: 'Statistici',
+      text: 'Statistici Generale',
       path: PAGES_PATHS.GENERAL_STATISTIC,
     },
   ]

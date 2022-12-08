@@ -9,9 +9,11 @@ import { useNavigate } from 'react-router-dom'
 import './home-hero-section.scss'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import api from 'common/api/api'
 export const HeroSection = () => {
   const [showModal, setShowModal] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
+  const [isAvailable, setIsAvailable] = useState<boolean>(false)
   const navigate = useNavigate()
   const move = require('../../assests/Move.png')
   const moveYellow = require('../../assests/pointer.png')
@@ -19,20 +21,27 @@ export const HeroSection = () => {
   const Foot1 = require('../../assests/Foot1.png')
   const Foot2 = require('../../assests/Foot2.png')
   const earth = require('../../assests/earth.png')
+  const wait = require('../../assests/Wait.png')
   useEffect(() => {
     let timer1 = setTimeout(() => setShowAnimation(true), 2000)
     return () => {
       clearTimeout(timer1)
     }
   }, [])
-
+  const token = localStorage.getItem('token')
   useEffect(() => {
     AOS.init({ duration: 2000 })
   }, [])
-
+  useEffect(() => {
+    const Date = async () => {
+      const response: any = await api.get(`/users/availability=${token}`)
+      setIsAvailable(response.data)
+    }
+    Date()
+  }, [])
   return (
     <LayoutContaier>
-      {showModal ? (
+      {isAvailable ? (
         <Modal setShowModal={setShowModal} isShowing={showModal}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>
@@ -52,8 +61,37 @@ export const HeroSection = () => {
             </div>
           </div>
         </Modal>
-      ) : null}
+      ) : (
+        <Modal setShowModal={setShowModal} isShowing={showModal}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                width: '100%',
+                justifyContent: 'center',
+                marginTop: '25px',
+                marginBottom: '25px',
+              }}>
+              <img alt='aaa' src={wait} />
+            </div>
 
+            <div>
+              <h4 className='modal-section-title'>
+                Deja ai calculat amprenta ta pentru această lună. Revino luna următoare pentru un
+                update.
+              </h4>
+              <h3 className='modal-section-subtitle '>
+                Până atunci, poți să urmărești evoluția personală sau să pui în practică
+                recomandările personalizate.
+              </h3>
+              <h4 style={{ fontSize: '20px' }} className='modal-section-title'>
+                Rămâi sustenabil!
+              </h4>
+            </div>
+          </div>
+        </Modal>
+      )}
       <div className='hero-section' data-aos='fade-up' data-aos-anchor-placement='top-center'>
         <div>
           <Logo />

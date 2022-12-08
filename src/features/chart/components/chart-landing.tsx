@@ -63,7 +63,7 @@ export const ChartLanding = () => {
     Date()
   }, [locationX?.text])
   const data = {
-    labels: [0, searchGlobalDate / 4, searchGlobalDate / 2, searchGlobalDate],
+    labels: globalDate,
     datasets: [
       {
         label: 'GLOBAL',
@@ -74,7 +74,7 @@ export const ChartLanding = () => {
       },
     ],
   }
-
+  console.log(globalDate)
   const localDateObj = {
     labels: ['CALATORII', 'GOSPODARIE', 'ALIMENATIE'],
     datasets: [
