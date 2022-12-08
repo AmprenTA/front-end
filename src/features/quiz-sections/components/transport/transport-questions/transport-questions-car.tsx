@@ -285,7 +285,10 @@ export const TransportQuestions = () => {
     <div className={style.transportQuestion}>
       <div className={style.transportQuestion_Body}>
         {showFlyQuestion ? (
-          <TransportFly arrayOfCars={carAnswers} location={locationX!.text} />
+          <TransportFly
+            arrayOfCars={carAnswers}
+            location={locationX!.text === undefined ? '' : locationX!.text!}
+          />
         ) : (
           <>
             <Stepper
