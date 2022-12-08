@@ -157,7 +157,8 @@ export const TransportQuestions = () => {
         return true
     }
   }
-  const locationX = countiesDownFlyOptions.find((item) => item.value === +location)
+  const locationX = locationsDownFlyOptions.find((item) => item.value === +location)
+  console.log(locationX)
   function getStepContent(step: number) {
     switch (step) {
       case 1:
