@@ -28,20 +28,23 @@ export const HeroSection = () => {
       clearTimeout(timer1)
     }
   }, [])
-  const token = localStorage.getItem('token')
+
   useEffect(() => {
     AOS.init({ duration: 2000 })
   }, [])
   useEffect(() => {
-    const Date = async () => {
-      const response: any = await api.get(`/users/availability=${token}`)
-      setIsAvailable(response.data)
-    }
-    Date()
-  }, [])
+    api
+      .get(`/users/availability`)
+      .then((response) => {
+        setIsAvailable(response.data)
+      })
+      .catch((error) => {
+        setIsAvailable(true)
+      })
+  }, [showModal])
   return (
     <LayoutContaier>
-      {isAvailable ? (
+      {!isAvailable ? (
         <Modal setShowModal={setShowModal} isShowing={showModal}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>

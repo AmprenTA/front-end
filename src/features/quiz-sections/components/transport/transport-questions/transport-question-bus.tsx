@@ -3,7 +3,7 @@ import { Button } from 'common/components/Button/Button'
 import { CheckBoxItem } from 'common/components/CheckBox/CheckBox'
 import { DropeDown } from 'common/components/DropeDown/DropeDown'
 import Input from 'common/components/Input/Input'
-import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
+
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
 import {
   answears,
@@ -29,7 +29,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
   const [stepNumber, setStepNumber] = useState<number>(1)
   const [newBas, setNewBas] = useState<string>('')
   const [multipleBus, setMultipleBus] = useState<Array<Bus>>([])
-  const [bus, setBus] = useState<Bus>({ transport_type: '', total_km: 0 })
+  const [bus, setBus] = useState<Bus>({ transport_type: '', total_km: '' })
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -160,9 +160,9 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
       case 1:
         return newBas !== '' ? false : true
       case 2:
-        return bus!.total_km > 0 ? false : true
+        return bus!.total_km !== '' ? false : true
       case 3:
-        return bus!.transport_type > '' ? false : true
+        return bus!.transport_type !== '' ? false : true
 
       default:
         return true
@@ -183,6 +183,11 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
       console.log('Error', err.response.data)
     }
   }
+  React.useEffect(() => {
+    if (stepNumber === 4 && newBas === 'Nu') {
+      handleSubmitAnswers()
+    }
+  }, [stepNumber, newBas])
   return (
     <ModalSection>
       <div className={style.transportQuestion}>
@@ -196,10 +201,10 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
           <div style={{ position: 'relative' }}>{getStepContent(stepNumber)}</div>
           {stepNumber === 4 && newBas === 'Nu' ? (
             <div className={style.transportQuestion_ButtonContainer}>
-              <button className={style.transportQuestion_Button} onClick={handleSubmitAnswers}>
+              {/* <button className={style.transportQuestion_Button} onClick={handleSubmitAnswers}>
                 Treci mai departe
                 <ArrowRight />
-              </button>
+              </button> */}
             </div>
           ) : (
             <></>

@@ -28,9 +28,9 @@ export const TransportQuestions = () => {
   const [counties, setCounties] = useState<number>(0)
   const [location, setLocation] = useState<number>(0)
   const [car, setCar] = useState<Car>({
-    fuel_type: 0,
+    fuel_type: '',
     total_km: 0,
-    fuel_consumption: 0,
+    fuel_consumption: '',
   })
   const countiesDownFlyOptions: Array<CustomDropdownOptionValue> = countiesOptions!.map(
     (location) => ({
@@ -41,12 +41,17 @@ export const TransportQuestions = () => {
   const l = countiesDownFlyOptions.find((item) => item.value === +counties)
 
   useEffect(() => {
-    const fetchFlyes = async () => {
-      const response: any = await api.get(`/locations?county=${l?.text!}`)
-      setLocationsOptions(response.data)
+    if (stepNumber === 2) {
+      api
+        .get(`/locations?county=${l?.text!}`)
+        .then((response) => {
+          setLocationsOptions(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
-    fetchFlyes()
-  }, [l?.text])
+  }, [l?.text, stepNumber])
 
   const locationsDownFlyOptions: Array<CustomDropdownOptionValue> = locationsOptions!.map(
     (location) => ({
@@ -55,11 +60,14 @@ export const TransportQuestions = () => {
     }),
   )
   useEffect(() => {
-    const fetchFlyes = async () => {
-      const response: any = await api.get(`/locations/counties`)
-      setCountiesOptions(response.data)
-    }
-    fetchFlyes()
+    api
+      .get(`/locations/counties`)
+      .then((response) => {
+        setCountiesOptions(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }, [])
 
   useEffect(() => {
@@ -131,17 +139,17 @@ export const TransportQuestions = () => {
   const isValid = () => {
     switch (stepNumber) {
       case 1:
-        return counties > 0 ? false : true
+        return counties >= 0 ? false : true
       case 2:
-        return counties > 0 ? false : true
+        return location >= 0 ? false : true
       case 3:
         return haveCar !== '' ? false : true
       case 4:
-        return car!.total_km > 0 ? false : true
+        return car!.total_km !== ' ' ? false : true
       case 5:
-        return car.fuel_type > 0 ? false : true
+        return car.fuel_type >= 0 ? false : true
       case 6:
-        return car!.fuel_consumption > 0 ? false : true
+        return car!.fuel_consumption !== ' ' ? false : true
       case 7:
         return false
 

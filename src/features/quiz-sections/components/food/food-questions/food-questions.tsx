@@ -17,18 +17,18 @@ interface Props {
 export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
   const [stepNumber, setStepNumber] = useState<number>(1)
   const [food, setFood] = useState<Food>({
-    beef: 0,
-    lamb: 0,
-    poultry: 0,
-    pork: 0,
-    fish: 0,
-    milk_based: 0,
-    cheese: 0,
-    eggs: 0,
-    coffee: 0,
-    vegetables: 0,
-    bread: 0,
-    footprint_id: 0,
+    beef: '',
+    lamb: '',
+    poultry: '',
+    pork: '',
+    fish: '',
+    milk_based: '',
+    cheese: '',
+    eggs: '',
+    coffee: '',
+    vegetables: '',
+    bread: '',
+    footprint_id: '',
   })
 
   const navigate = useNavigate()
@@ -59,7 +59,6 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
       console.log('Error', err.response.data)
     }
   }
-
   function getStepContent(step: number) {
     switch (step) {
       case 1:
@@ -223,37 +222,37 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
     }
   }
 
-  const isValid = () => {
-    switch (stepNumber) {
-      case 1:
-        return food.beef > 0 ? false : true
-      case 2:
-        return food.lamb > 0 ? false : true
-      case 3:
-        return food.poultry > 0 ? false : false
-      case 4:
-        return food.pork > 0 ? false : true
-      case 5:
-        return food.fish > 0 ? false : true
-      case 6:
-        return food.milk_based > 0 ? false : true
-      case 7:
-        return food.cheese > 0 ? false : true
-      case 8:
-        return food.eggs > 0 ? false : true
-      case 9:
-        return food.coffee > 0 ? false : true
-      case 10:
-        return food.vegetables > 0 ? false : true
-      case 11:
-        return food.bread > 0 ? false : true
-      case 12:
-        return false
+  // const isValid = () => {
+  //   switch (stepNumber) {
+  //     case 1:
+  //       return food.beef !== '' ? false : true
+  //     case 2:
+  //       return food.lamb !== '' ? false : true
+  //     case 3:
+  //       return food.poultry !== '' ? false : false
+  //     case 4:
+  //       return food.pork !== '' ? false : true
+  //     case 5:
+  //       return food.fish !== '' ? false : true
+  //     case 6:
+  //       return food.milk_based !== '' ? false : true
+  //     case 7:
+  //       return food.cheese !== '' ? false : true
+  //     case 8:
+  //       return food.eggs !== '' ? false : true
+  //     case 9:
+  //       return food.coffee !== '' ? false : true
+  //     case 10:
+  //       return food.vegetables !== '' ? false : true
+  //     case 11:
+  //       return food.bread !== '' ? false : true
+  //     case 12:
+  //       return false
 
-      default:
-        return false
-    }
-  }
+  //     default:
+  //       return false
+  //   }
+  // }
   return (
     <div className={style.transportQuestion}>
       <div className={style.transportQuestion_Body}>
@@ -279,8 +278,6 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
         <div>{getStepContent(stepNumber)}</div>
         <div className={style.transportQuestion_Footer}>
           <Button
-            disabled={isValid()}
-            style={isValid() ? { background: '#EEEEEE', border: '2px solid #959595' } : null}
             onClick={() => {
               setStepNumber(stepNumber + 1)
             }}

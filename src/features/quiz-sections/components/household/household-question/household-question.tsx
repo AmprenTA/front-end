@@ -1,7 +1,6 @@
 import api from 'common/api/api'
 import { Button } from 'common/components/Button/Button'
 import Input from 'common/components/Input/Input'
-import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
 import { question, stepperStyle } from 'features/quiz-sections/constants/constants'
 import { Household } from 'features/quiz-sections/models/transport-models'
@@ -15,7 +14,11 @@ interface Props {
 }
 export const HouseholdQuestions: React.FC<Props> = ({ ...props }) => {
   const [stepNumber, setStepNumber] = useState<number>(1)
-  const [household, setHousehold] = useState<Household>({ electricity: 0, natural_gas: 0, wood: 0 })
+  const [household, setHousehold] = useState<Household>({
+    electricity: '',
+    natural_gas: '',
+    wood: '',
+  })
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -82,11 +85,11 @@ export const HouseholdQuestions: React.FC<Props> = ({ ...props }) => {
   const isValid = () => {
     switch (stepNumber) {
       case 1:
-        return household.electricity > 0 ? false : true
+        return household.electricity !== '' ? false : true
       case 2:
-        return household.natural_gas > 0 ? false : true
+        return household.natural_gas !== '' ? false : true
       case 3:
-        return household.wood > 0 ? false : true
+        return household.wood !== '' ? false : true
 
       case 5:
         return false
@@ -110,6 +113,7 @@ export const HouseholdQuestions: React.FC<Props> = ({ ...props }) => {
       console.log('Error', err.response.data)
     }
   }
+
   return (
     <div className={style.transportQuestion}>
       <div className={style.transportQuestion_Body}>
@@ -122,7 +126,7 @@ export const HouseholdQuestions: React.FC<Props> = ({ ...props }) => {
         />
         <div>
           {getStepContent(stepNumber)}{' '}
-          {stepNumber === 3 ? (
+          {/* {stepNumber === 3 ? (
             <div className={style.transportQuestion_ButtonContainer}>
               <button className={style.transportQuestion_Button} onClick={handleSubmit}>
                 Treci mai departe
@@ -131,18 +135,18 @@ export const HouseholdQuestions: React.FC<Props> = ({ ...props }) => {
             </div>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
         <div className={style.transportQuestion_Footer}>
           <Button
-            disabled={isValid() || stepNumber === 3}
-            style={
-              isValid() || stepNumber === 3
-                ? { background: '#EEEEEE', border: '2px solid #959595' }
-                : null
-            }
+            disabled={isValid()}
+            style={isValid() ? { background: '#EEEEEE', border: '2px solid #959595' } : null}
             onClick={() => {
-              setStepNumber(stepNumber + 1)
+              if (stepNumber === 3 && household.wood !== '') {
+                handleSubmit()
+              } else {
+                setStepNumber(stepNumber + 1)
+              }
             }}
             className={style.transportQuestion_DownArrow}
             icon={<DownArrow />}

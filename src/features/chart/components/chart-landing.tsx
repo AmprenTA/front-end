@@ -20,7 +20,7 @@ export const ChartLanding = () => {
   const [searchGlobalDate, setSearchGlobalDate] = useState<number>(100)
   useEffect(() => {
     const fetchFlyes = async () => {
-      const response: any = await api.get(`/locations/counties`)
+      const response: any = await api.get(`/locations/?county=Suceava`)
       setCountiesOptions(response.data)
     }
     fetchFlyes()
