@@ -34,7 +34,7 @@ export const options = {
 }
 
 export const data = {
-  labels: ['01.07.2022', '11.07.2022', '21.07.2022', '31.07.2022'],
+  labels: ['0', '200', '400', '600'],
   datasets: [
     {
       label: 'CALATORII',
