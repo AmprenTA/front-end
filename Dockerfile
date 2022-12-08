@@ -8,5 +8,3 @@ RUN npm install
 COPY . .
 
 CMD npm start
-
-CMD ["nginx", "-g", "daemon off;"]
