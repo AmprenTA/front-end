@@ -42,28 +42,25 @@ export const ChartLanding = () => {
   )
   const locationX = countiesDownFlyOptions.find((item) => item.value === +dropeDownValue)
   useEffect(() => {
-    try {
-      const Date = async () => {
-        const response: any = await api.get(
-          `/statistics/average_footprints?location=${locationX?.text}`,
-        )
-        setLocalDate({
-          transport: response.data.transportation_carbon_footprint,
-          house: response.data.house_carbon_footprint,
-          food: response.data.food_carbon_footprint.average,
+    const Date = async () => {
+      await api
+        .get(`/statistics/average_footprints?location=${locationX?.text}`)
+        .then((response) => {
+          setLocalDate({
+            transport: response.data.transportation_carbon_footprint,
+            house: response.data.house_carbon_footprint,
+            food: response.data.food_carbon_footprint.average,
+          })
         })
-      }
-
-      Date()
-    } catch (err) {
-      if (err.response) {
-        setLocalDate({
-          transport: 0,
-          house: 0,
-          food: 0,
+        .catch((error: any) => {
+          setLocalDate({
+            transport: 0,
+            house: 0,
+            food: 0,
+          })
         })
-      }
     }
+    Date()
   }, [locationX?.text])
   const data = {
     labels: [0, searchGlobalDate / 4, searchGlobalDate / 2, searchGlobalDate],

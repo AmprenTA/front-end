@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 const token = localStorage.getItem('token')
 const api = axios.create({
@@ -10,13 +10,13 @@ const api = axios.create({
 })
 
 // Add a response interceptor
-api.interceptors.response.use(
+/* api.interceptors.response.use(
   (response: AxiosResponse<any>) => {
     return response
   },
   (error: any) => {
     return Promise.reject(error)
   },
-)
+) */
 
 export default api
