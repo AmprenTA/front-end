@@ -38,21 +38,21 @@ export const data = {
   datasets: [
     {
       label: 'CALATORII',
-      data: [],
+      data: [100.26, 250.5, 557.1, 568.568],
       borderColor: '#F78E91',
       backgroundColor: '#F78E91',
       textColor: '#5B5B5B',
     },
     {
       label: 'GOSPODARIE',
-      data: [0, 5, 13, 8],
+      data: [82.3, 69.7, 77.9, 73.72],
       borderColor: '#509046',
       backgroundColor: '#509046',
       textColor: '#5B5B5B',
     },
     {
       label: 'ALIMENATIE',
-      data: [0, 8, 10, 20],
+      data: [288.2, 300.1, 312.6, 303.76],
       borderColor: '#FCD351',
       backgroundColor: '#FCD351',
       textColor: '#5B5B5B',
