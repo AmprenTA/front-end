@@ -50,7 +50,7 @@ export const HomeChartGlobal: React.FC<PropsGlobal> = ({ ...props }) => {
       <div className={style.local} data-aos='fade-right'>
         <h2 className={style.local_Title}>Statistici</h2>
         <h3 className={style.local_Details}>
-          În baza informațiilor adunate, AmprenTA prezice următoarea evoluție la nivel global:
+          În baza informațiilor adunate, AmprenTA prezice următoarea evoluție la nivel national:
         </h3>
         <div className={style.local_InputContainer}>
           <input

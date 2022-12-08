@@ -67,7 +67,7 @@ export const ChartLanding = () => {
     labels: globalDate,
     datasets: [
       {
-        label: 'GLOBAL',
+        label: 'NATIONAL',
         data: globalDate,
         borderColor: '#FF6064',
         backgroundColor: '#FF6064',
