@@ -44,7 +44,7 @@ export const HeroSection = () => {
   }, [showModal])
   return (
     <LayoutContaier>
-      {isAvailable ? (
+      {!isAvailable ? (
         <Modal setShowModal={setShowModal} isShowing={showModal}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>

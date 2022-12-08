@@ -1,5 +1,5 @@
 export const PAGES_PATHS = {
-  HOME: '/',
+  HOME: '/*',
   REGISTER: '/inregistrare',
   LOGIN: '/conectare',
   TRANSPORT_SECTION: '/transport',

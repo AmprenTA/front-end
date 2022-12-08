@@ -1,14 +1,14 @@
 import api from 'common/api/api'
 import { Cards } from 'common/components/Card/Card'
-import { PAGES_PATHS } from 'common/constants/constant'
-import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
+// import { PAGES_PATHS } from 'common/constants/constant'
+// import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { Result } from 'features/quiz-sections/models/transport-models'
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { ModalSection } from '../modal-section.tsx/modal-section'
 import styles from './results.module.scss'
 export const Results = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { id } = useParams()
   const [result, setResult] = useState<Result>({
     transportation_carbon_footprint: 0,
@@ -49,14 +49,14 @@ export const Results = () => {
               Înregistrează-te pentru a-ți salva progresul, pentru a-ți compara rezultatele cu alte
               persoane din zona ta, dar și pentru mai multe predicții și informații.
             </h3>
-            <button
+            {/* <button
               className='button-try'
               onClick={(e) => {
                 navigate(PAGES_PATHS.REGISTER)
               }}>
               Înregistrează-te
               <ArrowRight />
-            </button>
+            </button> */}
           </>
         )}
       </div>
