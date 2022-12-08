@@ -34,11 +34,11 @@ export const options = {
 }
 
 export const data = {
-  labels: ['0', '200', '400', '600'],
+  labels: ['07.09.2022', '07.10.2022', '07.11.2022', '08.12.2022'],
   datasets: [
     {
       label: 'CALATORII',
-      data: [12, 19, 3, 5],
+      data: [],
       borderColor: '#F78E91',
       backgroundColor: '#F78E91',
       textColor: '#5B5B5B',
@@ -66,7 +66,7 @@ export function LocalChart() {
       <div className={style.local}>
         <h2 className={style.local_Title}>Statistici</h2>
         <h3 className={style.local_Details}>
-          În baza informațiilor adunate, AmprenTA prezice următoarea evoluție la nivelul local:
+          În baza informațiilor adunate, AmprenTA ta a avut urmatoarea evolutie:
         </h3>
         <Line options={options} data={data} />
       </div>

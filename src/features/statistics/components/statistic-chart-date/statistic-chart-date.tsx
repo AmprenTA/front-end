@@ -34,7 +34,7 @@ export const options = {
 }
 
 export const data = {
-  labels: ['0', '200', '400', '600'],
+  labels: ['07.09.2022', '07.10.2022', '07.11.2022', '08.12.2022'],
   datasets: [
     {
       label: 'CALATORII',
@@ -70,7 +70,7 @@ export function ChartDate() {
             <img alt='footprint' src={image} />
           </div>
           <h3 className={style.dateChart_Details}>
-            Amprenta României a scăzut cu un total de 15 g de CO2 față de luna trecută.
+            AmprentaTa a scăzut cu un total de 15 kg de CO2 față de luna trecută.
           </h3>
         </div>
         <Line options={options} data={data} />
