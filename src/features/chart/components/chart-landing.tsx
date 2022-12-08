@@ -74,7 +74,6 @@ export const ChartLanding = () => {
       },
     ],
   }
-  console.log(globalDate)
   const localDateObj = {
     labels: ['CALATORII', 'GOSPODARIE', 'ALIMENATIE'],
     datasets: [

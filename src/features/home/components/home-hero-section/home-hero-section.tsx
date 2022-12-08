@@ -13,7 +13,7 @@ import api from 'common/api/api'
 export const HeroSection = () => {
   const [showModal, setShowModal] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
-  const [isAvailable, setIsAvailable] = useState<boolean>(false)
+  const [isAvailable, setIsAvailable] = useState<boolean>(true)
   const navigate = useNavigate()
   const move = require('../../assests/Move.png')
   const moveYellow = require('../../assests/pointer.png')
