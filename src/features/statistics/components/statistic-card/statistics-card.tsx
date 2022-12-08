@@ -37,7 +37,7 @@ export const StatisticCards = () => {
   useEffect(() => {
     const Date = async () => {
       await api
-        .get(`/statistics/average_footprints/?total_footprints=${'Suceava, Suceava'}`)
+        .get(`/statistics/average_footprints?location=Suceava%2C%20Suceava`)
         .then((response) => {
           setSuceava({
             transport: response.data.transportation_carbon_footprint,
