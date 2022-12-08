@@ -3,6 +3,7 @@ import api from 'common/api/api'
 import { CustomDropdownOptionValue } from 'common/components/DropeDown/DropeDown'
 import { HomeChartGlobal } from 'features/home/components/home-chart-global/home-chart-global'
 import { HomeChartLocal } from 'features/home/components/home-chart-local/home-chart-local'
+import { StatisticCards } from 'features/statistics/components/statistic-card/statistics-card'
 import { LayoutContaier } from 'layout/layout-container/layout-container'
 import { LayoutFooter } from 'layout/layout-footer/layout-footer'
 import { Navbar } from 'layout/layout-navbar/layout-navbar'
@@ -92,6 +93,9 @@ export const ChartLanding = () => {
         setSearchGlobalDate={setSearchGlobalDate}
         searchGlobalDate={searchGlobalDate}
       />
+      <div style={{ marginBottom: '76px' }}>
+        <StatisticCards />
+      </div>
       <HomeChartLocal
         date={localDateObj}
         optionsDropeDown={countiesDownFlyOptions}
