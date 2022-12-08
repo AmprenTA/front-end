@@ -76,7 +76,7 @@ export const ChartLanding = () => {
     ],
   }
   const localDateObj = {
-    labels: ['CALATORII', 'GOSPODARIE', 'ALIMENATIE'],
+    labels: ['TRANSPORT', 'ALIMENATIE', 'GOSPODARIE'],
     datasets: [
       {
         data: [localDate.transport, localDate.house, localDate.food],
