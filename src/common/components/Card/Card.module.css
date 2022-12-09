@@ -1,0 +1,69 @@
+.Card {
+  display: flex;
+  width: 90%;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.Card_Container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  -moz-column-gap: 60px;
+  column-gap: 60px;
+}
+.Card_Card {
+  width: 140px;
+  border: 2px solid #222122;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 220px;
+  background: #fffef7;
+}
+.Card_Card p {
+  color: #5b5b5b;
+  font-size: 26px;
+  font-weight: 500;
+  margin: 10px;
+}
+.Card_Section {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+.Card_Min {
+  margin-top: 8px;
+  font-size: 16px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+.Card_Min span {
+  padding: 2px 0;
+  font-weight: 500;
+}
+.Card_CircleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  font-size: 24px;
+  font-weight: 500;
+}
+.Card_Circle {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  justify-content: center;
+  border: 3px solid #222122;
+} /*# sourceMappingURL=Card.module.css.map */

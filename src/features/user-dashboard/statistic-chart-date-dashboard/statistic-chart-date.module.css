@@ -1,0 +1,15 @@
+.dateChart {
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+.dateChart_Header {
+  display: flex;
+  width: 100%;
+}
+.dateChart_Details {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  margin-left: 32px;
+} /*# sourceMappingURL=statistic-chart-date.module.css.map */

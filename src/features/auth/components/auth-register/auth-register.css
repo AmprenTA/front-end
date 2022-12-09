@@ -1,0 +1,56 @@
+.error-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #eaa9ab;
+  border-radius: 4px;
+  height: 50px;
+  color: red;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.button-wrapper {
+  margin-top: 20px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #959595;
+}
+.button-wrapper .auth-register-button-try {
+  background: #fcd351;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #222122;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+.button-wrapper .auth-register-button-try:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #5b5b5b;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+.auth-wrapper .link {
+  text-decoration: none;
+  color: #222122;
+  font-weight: 500;
+} /*# sourceMappingURL=auth-register.css.map */

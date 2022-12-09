@@ -1,0 +1,20 @@
+.dateChart {
+  width: 100%;
+  margin-bottom: 100px;
+}
+.dateChart_Header {
+  display: flex;
+  width: 94%;
+}
+.dateChart_Details {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  margin-left: 32px;
+}
+.dateChart_DropeDownContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+} /*# sourceMappingURL=home-chart-date.module.css.map */

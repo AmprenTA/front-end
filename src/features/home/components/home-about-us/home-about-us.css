@@ -1,0 +1,88 @@
+.about-us {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  -moz-column-gap: 120px;
+  column-gap: 120px;
+}
+.about-us .first-union {
+  height: 180px;
+  width: 390px;
+  background-color: #acd3e2;
+  margin-bottom: 34px;
+  /* top-left | top-right | bottom-right | bottom-left */
+  border-radius: 0 100px 100px 0;
+  border: 3px solid #222122;
+  position: relative;
+}
+.about-us .image-wrapper {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+.about-us .image-wrapper img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border: 3px solid #222122;
+  border-radius: 50%;
+}
+.about-us .image-wrapper.Sergiu {
+  right: 220px;
+}
+.about-us .image-wrapper.Nadejda {
+  right: 12px;
+}
+.about-us .image-wrapper.Anastasia {
+  right: 220px;
+}
+.about-us .second {
+  width: 548px;
+}
+.about-us .third {
+  width: 286px;
+}
+.about-us .header {
+  color: #222122;
+  font-size: 40px;
+  line-height: 64px;
+  font-weight: 600;
+}
+.about-us .paragraph {
+  width: 525px;
+  font-size: 20px;
+  color: #5b5b5b;
+}
+.about-us .steps-wrapper .steps-image {
+  margin-top: 56px;
+  width: 552px;
+}
+
+.steps {
+  position: relative;
+  -moz-column-gap: 24px;
+  column-gap: 24px;
+  color: #5b5b5b;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.steps .first {
+  position: absolute;
+  text-align: start;
+  width: 144px;
+}
+.steps .second {
+  position: absolute;
+  text-align: center;
+  right: 242px;
+  width: 144px;
+}
+.steps .third {
+  position: absolute;
+  text-align: center;
+  right: 0;
+  width: 144px;
+} /*# sourceMappingURL=home-about-us.css.map */

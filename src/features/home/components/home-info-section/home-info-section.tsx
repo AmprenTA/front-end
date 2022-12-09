@@ -62,7 +62,7 @@ export const InfoSection = () => {
         </div>
       </div>
       <div style={{ marginBottom: '50px' }} data-aos='fade-left'>
-        <h3 className='card-header' style={{ backgroundColor: '#FCD351' }}>
+        <h3 className='card-header' style={{ backgroundColor: '#FCD351', color: 'black' }}>
           Cum calculez amprenta de carbon?
         </h3>
         <div className='card'>
