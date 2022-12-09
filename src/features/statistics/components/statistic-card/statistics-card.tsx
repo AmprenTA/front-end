@@ -1,8 +1,12 @@
+import Aos from 'aos'
 import api from 'common/api/api'
 import { LayoutContaier } from 'layout/layout-container/layout-container'
 import { useEffect, useState } from 'react'
 import styles from './statistic-card.module.scss'
 export const StatisticCards = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 })
+  }, [])
   const [romania, setRomania] = useState({
     transport: 0,
     house: 0,
@@ -57,8 +61,7 @@ export const StatisticCards = () => {
   }, [])
   return (
     <LayoutContaier>
-      {' '}
-      <div className={styles.statisticCard_Container}>
+      <div className={styles.statisticCard_Container} data-aos='fade-right'>
         <div className={styles.statisticCard_Card}>
           <p>În medie, o persoană din orașul Suceava produce CO2 în cantitate de:</p>
           <div className={styles.statisticCard_Section}>

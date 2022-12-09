@@ -11,6 +11,8 @@ import {
 import { Line } from 'react-chartjs-2'
 import { LayoutContaier } from 'layout/layout-container/layout-container'
 import style from './statistic-chart-local.module.scss'
+import { useEffect } from 'react'
+import Aos from 'aos'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 export const options = {
@@ -61,10 +63,13 @@ export const data = {
 }
 
 export function LocalChart() {
+  useEffect(() => {
+    Aos.init({ duration: 2000 })
+  }, [])
   return (
     <LayoutContaier>
-      <div className={style.local}>
-        <h2 className={style.local_Title}>Statistici</h2>
+      <div className={style.local} data-aos='fade-up' data-aos-anchor-placement='top-center'>
+        <h2 className={style.local_Title}>Amprenta mea</h2>
         <h3 className={style.local_Details}>
           În baza informațiilor adunate, AmprenTA ta a avut urmatoarea evolutie:
         </h3>

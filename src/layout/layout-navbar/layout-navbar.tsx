@@ -3,14 +3,17 @@ import { SimpleLogo } from 'common/assets/icons/SimpleLogo'
 import { PAGES_PATHS } from 'common/constants/constant'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { LayoutContaier } from 'layout/layout-container/layout-container'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import './layout-navbar.scss'
 export const Navbar = () => {
   const token = localStorage.getItem('token')
   const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const location = pathname.split('/')[1]
+
   const navbarLinksAuth = [
     {
-      text: 'Statistici',
+      text: 'Amprenta mea',
       path: PAGES_PATHS.STATISTIC,
     },
     {
@@ -21,10 +24,10 @@ export const Navbar = () => {
       text: 'Statistici Generale',
       path: PAGES_PATHS.GENERAL_STATISTIC,
     },
-    {
-      text: 'Amprenta mea',
-      path: PAGES_PATHS.USER_DASHBOARD,
-    },
+    // {
+    //   text: 'Amprenta mea',
+    //   path: PAGES_PATHS.USER_DASHBOARD,
+    // },
     {
       text: 'Despre noi',
       path: PAGES_PATHS.HOME,
@@ -50,7 +53,15 @@ export const Navbar = () => {
       <ul className='nav-menu'>
         {navLinks.map((item, index) => {
           return (
-            <NavLink className='link' key={index} to={item.path}>
+            <NavLink
+              style={
+                location.toUpperCase() === item.path.slice(1).toUpperCase()
+                  ? { borderBottom: '2px solid #5b5b5b' }
+                  : {}
+              }
+              className='link'
+              key={index}
+              to={item.path}>
               {item.text}
             </NavLink>
           )

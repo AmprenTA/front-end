@@ -4,6 +4,7 @@ import { LayoutContaier } from 'layout/layout-container/layout-container'
 import style from './statistic-chart-date.module.scss'
 import { useEffect, useState } from 'react'
 import api from 'common/api/api'
+import Aos from 'aos'
 ChartJS.register(ArcElement, Tooltip, Legend)
 const options = {
   responsive: true,
@@ -19,6 +20,9 @@ const options = {
 }
 export function ChartDate() {
   const image = require('../../../../common/assets/Footprint.png')
+  useEffect(() => {
+    Aos.init({ duration: 2000 })
+  }, [])
   const [localDate, setLocalDate] = useState({
     transport: 0,
     house: 0,
@@ -59,7 +63,7 @@ export function ChartDate() {
   }
   return (
     <LayoutContaier>
-      <div className={style.dateChart}>
+      <div className={style.dateChart} data-aos='fade-left'>
         <div className={style.dateChart_Header}>
           <div>
             <img alt='footprint' src={image} />
