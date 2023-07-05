@@ -2,7 +2,7 @@ import api from 'common/api/api'
 import { Button } from 'common/components/Button/Button'
 import Input from 'common/components/Input/Input'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
-import { question, stepperStyle } from 'features/quiz-sections/constants/constants'
+import { question } from 'features/quiz-sections/constants/constants'
 import { Household } from 'features/quiz-sections/models/transport-models'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import { useState } from 'react'
@@ -120,8 +120,6 @@ export const HouseholdQuestions: React.FC<Props> = ({ ...props }) => {
         <Stepper
           steps={[{ label: '.' }, { label: '.' }, { label: '.' }]}
           className={style.transportQuestion_Stepper}
-          connectorStyleConfig={{ activeColor: '#509046' }}
-          styleConfig={stepperStyle}
           activeStep={stepNumber}
         />
         <div>

@@ -4,12 +4,7 @@ import { CheckBoxItem } from 'common/components/CheckBox/CheckBox'
 import { CustomDropdownOptionValue, DropeDown } from 'common/components/DropeDown/DropeDown'
 import Input from 'common/components/Input/Input'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
-import {
-  answears,
-  carboranti,
-  question,
-  stepperStyle,
-} from 'features/quiz-sections/constants/constants'
+import { answears, carboranti, question } from 'features/quiz-sections/constants/constants'
 import { Car } from 'features/quiz-sections/models/transport-models'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import React, { useEffect, useState } from 'react'
@@ -303,8 +298,8 @@ export const TransportQuestions = () => {
                 { label: '7.' },
               ]}
               className={style.transportQuestion_Stepper}
-              connectorStyleConfig={{ activeColor: '#509046' }}
-              styleConfig={stepperStyle}
+              // connectorStyleConfig={{ activeColor: '#509046' }}
+              // styleConfig={stepperStyle}
               activeStep={stepNumber}></Stepper>
             <div>{getStepContent(stepNumber)}</div>
             <div className={style.transportQuestion_Footer}>

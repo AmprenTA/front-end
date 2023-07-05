@@ -5,12 +5,7 @@ import { DropeDown } from 'common/components/DropeDown/DropeDown'
 import Input from 'common/components/Input/Input'
 
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
-import {
-  answears,
-  tarnsportOptions,
-  question,
-  stepperStyle,
-} from 'features/quiz-sections/constants/constants'
+import { answears, tarnsportOptions, question } from 'features/quiz-sections/constants/constants'
 import { Bus, Car, Fly, Transport } from 'features/quiz-sections/models/transport-models'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import React, { useEffect, useState } from 'react'
@@ -195,8 +190,8 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
           <Stepper
             steps={[{ label: '.' }, { label: '.' }, { label: '.' }, { label: '.' }]}
             className={style.transportQuestion_Stepper}
-            connectorStyleConfig={{ activeColor: '#509046' }}
-            styleConfig={stepperStyle}
+            // connectorStyleConfig={{ activeColor: '#509046' }}
+            // styleConfig={stepperStyle}
             activeStep={stepNumber}></Stepper>
           <div style={{ position: 'relative' }}>{getStepContent(stepNumber)}</div>
           {stepNumber === 4 && newBas === 'Nu' ? (

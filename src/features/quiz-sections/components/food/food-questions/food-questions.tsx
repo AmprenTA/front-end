@@ -3,7 +3,7 @@ import { Button } from 'common/components/Button/Button'
 import { RadioButton } from 'common/components/RadioButton/RadioButton'
 import { ArrowRight } from 'features/home/assests/icons/ArrowRight'
 import { UpArrow } from 'features/quiz-sections/assets/icons/UpArrow'
-import { question, stepperStyle } from 'features/quiz-sections/constants/constants'
+import { question } from 'features/quiz-sections/constants/constants'
 import { Food } from 'features/quiz-sections/models/transport-models'
 import { DownArrow } from 'features/quiz/assets/icons/DownArrow'
 import { useState } from 'react'
@@ -221,38 +221,6 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
         )
     }
   }
-
-  // const isValid = () => {
-  //   switch (stepNumber) {
-  //     case 1:
-  //       return food.beef !== '' ? false : true
-  //     case 2:
-  //       return food.lamb !== '' ? false : true
-  //     case 3:
-  //       return food.poultry !== '' ? false : false
-  //     case 4:
-  //       return food.pork !== '' ? false : true
-  //     case 5:
-  //       return food.fish !== '' ? false : true
-  //     case 6:
-  //       return food.milk_based !== '' ? false : true
-  //     case 7:
-  //       return food.cheese !== '' ? false : true
-  //     case 8:
-  //       return food.eggs !== '' ? false : true
-  //     case 9:
-  //       return food.coffee !== '' ? false : true
-  //     case 10:
-  //       return food.vegetables !== '' ? false : true
-  //     case 11:
-  //       return food.bread !== '' ? false : true
-  //     case 12:
-  //       return false
-
-  //     default:
-  //       return false
-  //   }
-  // }
   return (
     <div className={style.transportQuestion}>
       <div className={style.transportQuestion_Body}>
@@ -272,8 +240,8 @@ export const FoodQuestions: React.FC<Props> = ({ ...props }) => {
             { label: '.' },
           ]}
           className={style.transportQuestion_Stepper}
-          connectorStyleConfig={{ activeColor: '#509046' }}
-          styleConfig={stepperStyle}
+          // connectorStyleConfig={{ activeColor: '#509046' }}
+          // styleConfig={stepperStyle}
           activeStep={stepNumber}></Stepper>
         <div>{getStepContent(stepNumber)}</div>
         <div className={style.transportQuestion_Footer}>
