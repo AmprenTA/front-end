@@ -142,7 +142,7 @@ export const TransportQuestions = () => {
       case 4:
         return car!.total_km !== ' ' ? false : true
       case 5:
-        return car.fuel_type >= 0 ? false : true
+        return car.fuel_type !== ' ' ? false : true
       case 6:
         return car!.fuel_consumption !== ' ' ? false : true
       case 7:
@@ -281,10 +281,7 @@ export const TransportQuestions = () => {
     <div className={style.transportQuestion}>
       <div className={style.transportQuestion_Body}>
         {showFlyQuestion ? (
-          <TransportFly
-            arrayOfCars={carAnswers}
-            location={locationX!.text === undefined ? '' : locationX!.text!}
-          />
+          <TransportFly arrayOfCars={carAnswers} location={locationX! && locationX!.text} />
         ) : (
           <>
             <Stepper
@@ -298,8 +295,6 @@ export const TransportQuestions = () => {
                 { label: '7.' },
               ]}
               className={style.transportQuestion_Stepper}
-              // connectorStyleConfig={{ activeColor: '#509046' }}
-              // styleConfig={stepperStyle}
               activeStep={stepNumber}></Stepper>
             <div>{getStepContent(stepNumber)}</div>
             <div className={style.transportQuestion_Footer}>

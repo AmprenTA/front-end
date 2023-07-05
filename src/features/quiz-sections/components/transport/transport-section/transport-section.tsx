@@ -32,17 +32,7 @@ export const TransportSection = () => {
           </>
         ) : (
           <>
-            <Stepper
-              className={styles.transportSection_Stepper}
-              // connectorStyleConfig={{ activeColor: '#509046', size: '1px' }}
-              // styleConfig={{
-              //   completedBgColor: '#509046',
-              //   completedTextColor: '#509046',
-              //   activeBgColor: '#FCD351',
-              //   activeTextColor: '#FCD351',
-              //   inactiveTextColor: '#e0e0e0',
-              // }}
-              activeStep={1}>
+            <Stepper className={styles.transportSection_Stepper} activeStep={1}>
               <Step label='Calatorii' />
               <Step label='Gospodarie' />
               <Step label='Alimentatie' />
