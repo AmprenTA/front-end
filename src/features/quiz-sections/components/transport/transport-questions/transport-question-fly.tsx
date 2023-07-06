@@ -183,8 +183,6 @@ export const TransportFly: React.FC<Props> = ({ ...props }) => {
               <Stepper
                 steps={[{ label: '1.' }, { label: '2.' }, { label: '3.' }, { label: '4.' }]}
                 className={style.transportQuestion_Stepper}
-                // connectorStyleConfig={{ activeColor: '#509046' }}
-                // styleConfig={stepperStyle}
                 activeStep={stepNumber}></Stepper>{' '}
               <div>{getStepContent(stepNumber)}</div>
               <div className={style.transportQuestion_Footer}>

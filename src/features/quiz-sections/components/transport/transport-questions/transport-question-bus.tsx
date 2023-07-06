@@ -36,7 +36,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
     if (stepNumber === 1 && newBas === 'Nu') {
       const addTransport = async () => {
         const paylaod: Transport = {
-          location: props.location,
+          location: 'Suceava',
           cars: props.arrayOfCars,
           flights: props.multipleFly,
           public_transports: multipleBus,
@@ -178,6 +178,7 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
       console.log('Error', err.response.data)
     }
   }
+  console.log(stepNumber)
   React.useEffect(() => {
     if (stepNumber === 4 && newBas === 'Nu') {
       handleSubmitAnswers()
@@ -190,20 +191,18 @@ export const TransportBus: React.FC<Props> = ({ ...props }) => {
           <Stepper
             steps={[{ label: '.' }, { label: '.' }, { label: '.' }, { label: '.' }]}
             className={style.transportQuestion_Stepper}
-            // connectorStyleConfig={{ activeColor: '#509046' }}
-            // styleConfig={stepperStyle}
             activeStep={stepNumber}></Stepper>
           <div style={{ position: 'relative' }}>{getStepContent(stepNumber)}</div>
-          {stepNumber === 4 && newBas === 'Nu' ? (
+          {/* {stepNumber === 4 && newBas === 'Nu' ? (
             <div className={style.transportQuestion_ButtonContainer}>
-              {/* <button className={style.transportQuestion_Button} onClick={handleSubmitAnswers}>
+              <button className={style.transportQuestion_Button} onClick={handleSubmitAnswers}>
                 Treci mai departe
                 <ArrowRight />
-              </button> */}
+              </button>
             </div>
           ) : (
             <></>
-          )}
+          )} */}
           <div className={style.transportQuestion_Footer}>
             <Button
               disabled={isValid()}

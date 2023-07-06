@@ -20,8 +20,8 @@ export const TransportQuestions = () => {
   const [carAnswers, setCarAnswear] = useState<Array<Car>>([])
   const [countiesOptions, setCountiesOptions] = useState<Array<any>>([])
   const [locationsOptions, setLocationsOptions] = useState<Array<any>>([])
-  const [counties, setCounties] = useState<number>(0)
-  const [location, setLocation] = useState<number>(0)
+  const [counties, setCounties] = useState<any>('')
+  const [location, setLocation] = useState<any>('Suceava')
   const [car, setCar] = useState<Car>({
     fuel_type: '',
     total_km: 0,
@@ -33,12 +33,12 @@ export const TransportQuestions = () => {
       text: location!.name,
     }),
   )
-  const l = countiesDownFlyOptions.find((item) => item.value === +counties)
+  const setedLocations = countiesDownFlyOptions.find((item) => item.value === +counties)
 
   useEffect(() => {
     if (stepNumber === 2) {
       api
-        .get(`/locations?county=${l?.text!}`)
+        .get(`/locations?county=${location}`)
         .then((response) => {
           setLocationsOptions(response.data)
         })
@@ -46,7 +46,7 @@ export const TransportQuestions = () => {
           console.log(error)
         })
     }
-  }, [l?.text, stepNumber])
+  }, [setedLocations?.text, stepNumber])
 
   const locationsDownFlyOptions: Array<CustomDropdownOptionValue> = locationsOptions!.map(
     (location) => ({
@@ -134,9 +134,9 @@ export const TransportQuestions = () => {
   const isValid = () => {
     switch (stepNumber) {
       case 1:
-        return counties >= 0 ? false : true
+        return counties !== '' ? false : true
       case 2:
-        return location >= 0 ? false : true
+        return location !== '' ? false : true
       case 3:
         return haveCar !== '' ? false : true
       case 4:
