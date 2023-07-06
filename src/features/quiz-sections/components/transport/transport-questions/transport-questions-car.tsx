@@ -21,7 +21,7 @@ export const TransportQuestions = () => {
   const [countiesOptions, setCountiesOptions] = useState<Array<any>>([])
   const [locationsOptions, setLocationsOptions] = useState<Array<any>>([])
   const [counties, setCounties] = useState<any>('')
-  const [location, setLocation] = useState<any>('Suceava')
+  const [location, setLocation] = useState<any>('')
   const [car, setCar] = useState<Car>({
     fuel_type: '',
     total_km: 0,
@@ -33,12 +33,11 @@ export const TransportQuestions = () => {
       text: location!.name,
     }),
   )
-  const setedLocations = countiesDownFlyOptions.find((item) => item.value === +counties)
-
+  const l = countiesDownFlyOptions.find((item) => item.value === +counties)
   useEffect(() => {
     if (stepNumber === 2) {
       api
-        .get(`/locations?county=${location}`)
+        .get(`/locations?county=${l?.text}`)
         .then((response) => {
           setLocationsOptions(response.data)
         })
@@ -46,7 +45,7 @@ export const TransportQuestions = () => {
           console.log(error)
         })
     }
-  }, [setedLocations?.text, stepNumber])
+  }, [l?.text, stepNumber])
 
   const locationsDownFlyOptions: Array<CustomDropdownOptionValue> = locationsOptions!.map(
     (location) => ({
